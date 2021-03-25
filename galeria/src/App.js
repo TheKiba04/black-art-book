@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
+import Footer from './Footer'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -16,6 +17,7 @@ function App() {
       </Router>
       <Heading/>
       <Main/>
+      <Footer/>
     </div>
   )
 }

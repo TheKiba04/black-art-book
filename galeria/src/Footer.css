@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0.5em;
+  background: lightgrey;
+  box-shadow: 0px 10px 700px black;
+}
+.footer__contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer__contact > img {
+  width: 40px;
+  padding: 0.5em;
+}

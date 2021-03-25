@@ -5,4 +5,8 @@
 }
 .heading__header{
     padding-right: 30%;
+    font-size: 50px;
+}
+.heading__subheader{
+    padding-left: 30%;
 }

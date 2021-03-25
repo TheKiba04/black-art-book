@@ -6,7 +6,7 @@ import './Navbar.css'
 function Navbar() {
     return (
         <div className='navbar'>
-            <div className='navbar__logo'><img src={logo} alt="logo"/></div>
+            <div className='navbar__logo logo'><img src={logo} alt="logo"/></div>
             <div className='navbar__links'>
                     <div className='navbar__link'>
                         <Link to='/'>Text1</Link>
