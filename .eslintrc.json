@@ -1,0 +1,82 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react",
+		"react-hooks",
+		"@typescript-eslint",
+		"simple-import-sort",
+		"mui-path-imports",
+		"prettier"
+	],
+	"rules": {
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "windows"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "never"],
+		"react/react-in-jsx-scope": "off",
+		"camelcase": "error",
+		"spaced-comment": "error",
+		"no-duplicate-imports": ["error", { "includeExports": true }],
+		"padding-line-between-statements": [
+			"error",
+			{ "blankLine": "always", "prev": "*", "next": "return" },
+			{ "blankLine": "always", "prev": ["const", "let"], "next": "*" },
+			{ "blankLine": "any", "prev": ["const", "let"], "next": ["const", "let"] },
+			{ "blankLine": "always", "prev": ["case", "default"], "next": "*" }
+		],
+		"no-ex-assign": "error",
+		"no-fallthrough": ["error", { "commentPattern": "break[\\s\\w]*omitted" }],
+		"no-inner-declarations": "error",
+		"no-invalid-regexp": "error",
+		"simple-import-sort/imports": [
+			"error",
+			{
+				"groups": [["^react"], ["^@?\\w"], ["@/(.*)"], ["^.+\\.s?css$"]]
+			}
+		],
+		//Suggestions
+		"arrow-body-style": ["error", "as-needed"],
+		"complexity": ["error", 2],
+		"eqeqeq": ["error", "always"],
+		"no-alert": "error",
+		"no-bitwise": "error",
+		"no-console": ["error", { "allow": ["warn", "error"] }],
+		"no-empty": "error",
+		"no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
+		"no-lonely-if": "error",
+		"no-loop-func": "error",
+		"no-magic-numbers": ["error", { "ignoreArrayIndexes": true, "ignoreDefaultValues": true }],
+		"no-multi-assign": "error",
+		"no-param-reassign": "error",
+		"react/function-component-definition": [
+			"error",
+			{
+			  "namedComponents": "arrow-function"
+			}
+		  ],
+		"no-restricted-imports": ["error", "@mui/material", "@mui/icons-material"],
+		"mui-path-imports/mui-path-imports": "error"
+	},
+	"settings": {
+		"import/resolver": {
+			"typescript": {}
+		}
+	}
+}
