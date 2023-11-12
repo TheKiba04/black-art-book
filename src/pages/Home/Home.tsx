@@ -1,12 +1,12 @@
-import Footer from '../../components/Footer/Footer'
-import Heading from '../../components/Heading/Heading'
-import RecentArts from '../../components/RecentArts/RecentArts'
+import BlockDivider from '@/components/BlockDivider/BlockDivider'
+import Heading from '@/components/Heading/Heading'
+// import RecentArts from '@/components/RecentArts/RecentArts'
 
 const Home = () => (
 	<>
 		<Heading />
-		<RecentArts />
-		{/* <Footer /> */}
+		<BlockDivider />
+		{/* <RecentArts /> */}
 	</>
 )
 

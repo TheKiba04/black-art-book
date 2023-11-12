@@ -1,5 +1,6 @@
 body {
-  margin: 0;
-  font-family: "Rubik", sans-serif;
-  font-family: "Rubik Mono One", monospace;
+	margin: 0;
+	font-family: 'Rubik', sans-serif;
+	font-family: 'Rubik Mono One', monospace;
+	overflow: hidden;
 }
