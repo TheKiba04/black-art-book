@@ -1,10 +1,12 @@
 import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
+import { useTheme } from '@mui/material/styles'
 
 import { useStyles } from './BlockDivider.styles'
 
 const BlockDivider = () => {
-	const styles = useStyles()
+	const theme = useTheme
+	const styles = useStyles(theme)
 
 	return (
 		<Grid container>

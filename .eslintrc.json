@@ -53,7 +53,7 @@
 		],
 		//Suggestions
 		"arrow-body-style": ["error", "as-needed"],
-		"complexity": ["error", 2],
+		"complexity": ["error", 3],
 		"eqeqeq": ["error", "always"],
 		"no-alert": "error",
 		"no-bitwise": "error",
@@ -68,9 +68,9 @@
 		"react/function-component-definition": [
 			"error",
 			{
-			  "namedComponents": "arrow-function"
+				"namedComponents": "arrow-function"
 			}
-		  ],
+		],
 		"no-restricted-imports": ["error", "@mui/material", "@mui/icons-material"],
 		"mui-path-imports/mui-path-imports": "error"
 	},

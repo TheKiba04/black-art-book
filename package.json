@@ -7,11 +7,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.16",
     "@mui/styles": "^5.14.17",
+    "firebase": "^10.6.0",
     "lodash": "^4.17.21",
-    "mobx": "^6.10.2",
-    "mobx-react-lite": "^4.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10",
     "react-router-dom": "^6.18.0"
   },
   "scripts": {

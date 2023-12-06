@@ -1,22 +1,25 @@
-import './Footer.css'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
-const Footer = () => (
-	<div className='footer'>
-		<div className='footer_logo logo'>
-			<img src='/assets/logo.jpg' alt='logo' />
-		</div>
-		<div>copyright</div>
-		<div>
-			<div className='footer__contact'>
-				<img src='/assets/logo.jpg' alt='footer__logo_mini' />
-				<p>texttextext</p>
-			</div>
-			<div className='footer__contact'>
-				<img src='/assets/logo.jpg' alt='footer__logo_mini-logo' />
-				<p>texttextext</p>
-			</div>
-		</div>
-	</div>
-)
+import { useStyles } from './Footer.styles'
+
+const Footer = () => {
+	const styles = useStyles()
+
+	return (
+		<Grid
+			container
+			className={styles.footerContainer}
+			component='footer'
+			justifyContent='center'
+			alignItems='center'
+			p={2}
+		>
+			<Typography variant='body2' align='center'>
+				© 2023 Art Gallery
+			</Typography>
+		</Grid>
+	)
+}
 
 export default Footer

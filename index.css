@@ -2,5 +2,13 @@ body {
 	margin: 0;
 	font-family: 'Rubik', sans-serif;
 	font-family: 'Rubik Mono One', monospace;
-	overflow: hidden;
+	/* overflow: hidden; */
+}
+
+img {
+	filter: grayscale(1);
+}
+
+div {
+	filter: grayscale(1);
 }

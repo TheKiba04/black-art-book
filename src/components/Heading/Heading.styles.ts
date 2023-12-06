@@ -6,22 +6,24 @@ import theme from '@/styles/theme'
 export const useStyles = makeStyles({
 	headingContainer: {
 		padding: '10rem 0 0',
+		overflow: 'hidden',
 	},
 	headingSubtitle: {
 		paddingTop: '5rem!important',
 		paddingBottom: '2rem!important',
 	},
 	headingButton: {
-		backgroundColor: `${theme.palette.primary.dark} !important`,
-		color: `${theme.palette.primary.main} !important`,
-		border: `2px solid ${theme.palette.primary.main} !important`,
-		outline: `2px solid ${theme.palette.primary.dark} !important`,
+		backgroundColor: theme.palette.primary.dark,
+		color: theme.palette.primary.main,
+		border: `2px solid ${theme.palette.primary.main}`,
+		outline: `2px solid ${theme.palette.primary.dark}`,
 		borderRadius: '2px',
-		padding: '0.3em 1em !important',
+		padding: '0.3em 1em',
+		marginBottom: '2rem',
 		'&:hover': {
-			backgroundColor: `${theme.palette.primary.main} !important`,
-			color: `${theme.palette.primary.dark} !important`,
-			border: `2px solid ${theme.palette.primary.dark} !important`,
+			backgroundColor: theme.palette.primary.main,
+			color: theme.palette.primary.dark,
+			border: `2px solid ${theme.palette.primary.dark}`,
 		},
 	},
 	slideInLeft: {

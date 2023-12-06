@@ -1,1 +1,2 @@
-export const logger = (data: string) => console.warn(data)
+export const loggerWarn = (data: unknown) => console.warn(data)
+export const loggerErr = (data: unknown) => console.error(data)
