@@ -21,7 +21,6 @@ interface ArtModalProps {
 	contentText: string
 }
 
-// eslint-disable-next-line complexity
 const ArtModal = ({ open, onClose, onSubmit, title, contentText }: ArtModalProps) => {
 	const styles = useStyles()
 
