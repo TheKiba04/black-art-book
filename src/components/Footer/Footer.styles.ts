@@ -4,8 +4,6 @@ import theme from '@/styles/theme'
 
 export const useStyles = makeStyles({
 	footerContainer: {
-		width: '110%',
-		marginLeft: '-5%',
 		marginTop: '50px',
 		backgroundColor: theme.palette.primary.dark,
 		color: theme.palette.primary.main,

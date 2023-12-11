@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import BlockDivider from '@/components/BlockDivider/BlockDivider'
-import Footer from '@/components/Footer/Footer'
 import ListOfArts from '@/components/ListOfArts/ListOfArts'
 import Passport from '@/components/Passport/Passport'
 import { getUserArts } from '@/helpers/database'
@@ -27,7 +26,6 @@ const Profile = () => {
 			<Passport user={user} />
 			<BlockDivider />
 			<ListOfArts title='My Arts' personal list={arts} onAddArts={addArts} />
-			<Footer />
 		</>
 	)
 }

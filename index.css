@@ -1,8 +1,15 @@
+html {
+	height: 100vh;
+}
 body {
 	margin: 0;
 	font-family: 'Rubik', sans-serif;
 	font-family: 'Rubik Mono One', monospace;
-	/* overflow: hidden; */
+	height: 100%;
+}
+
+body > div {
+	height: 100%;
 }
 
 img {
