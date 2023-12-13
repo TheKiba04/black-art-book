@@ -6,7 +6,7 @@ import { createArt } from '@/helpers/database'
 import { useAuth } from '@/hooks/useAuth'
 import { Art } from '@/types/Art'
 
-import ArtModal from '../ArtModal/ArtModal'
+import UploadArtModal from '../UploadArtModal/UploadArtModal'
 
 interface UploadArtProps {
 	onAddArts: (art: Art) => void
@@ -21,10 +21,10 @@ const UploadArt = ({ onAddArts }: UploadArtProps) => {
 			const art = await createArt(
 				user.uid,
 				{
-					uid: user.uid,
 					name,
 					description,
 					createdBy: { uid: user.uid, name: user.fullname },
+					likes: [],
 				},
 				file
 			)
@@ -45,7 +45,7 @@ const UploadArt = ({ onAddArts }: UploadArtProps) => {
 			<Button variant='contained' color='secondary' onClick={handleOpenModal}>
 				Upload image
 			</Button>
-			<ArtModal
+			<UploadArtModal
 				open={open}
 				onClose={handleCloseModal}
 				onSubmit={handleUploadArt}

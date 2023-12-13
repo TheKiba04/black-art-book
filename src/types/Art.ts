@@ -7,4 +7,6 @@ export interface Art {
 		userId: string
 		name: string
 	}
+	likes: string[]
+	comments: string
 }

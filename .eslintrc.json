@@ -48,7 +48,7 @@
 		"simple-import-sort/imports": [
 			"error",
 			{
-				"groups": [["^react"], ["^@?\\w"], ["@/(.*)"], ["^.+\\.s?css$"]]
+				"groups": [["^react"], ["^@?\\w"], ["@/(.*)"], ["@mui/icons-material/*"], ["^.+\\.s?css$"]]
 			}
 		],
 		//Suggestions

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Lock } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
 
 import Avatar from '@mui/material/Avatar'
@@ -14,6 +13,8 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import { signin } from '@/helpers/auth'
+
+import LockIcon from '@mui/icons-material/Lock'
 
 const Copyright = () => (
 	<Typography variant='body2' color='text.secondary' align='center'>
@@ -71,7 +72,7 @@ export const SignIn = () => {
 					}}
 				>
 					<Avatar sx={{ m: 1, bgcolor: 'primary.dark' }}>
-						<Lock />
+						<LockIcon />
 					</Avatar>
 					<Typography component='h1' variant='h5'>
 						Sign in

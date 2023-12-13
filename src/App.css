@@ -1,3 +1,14 @@
 .container {
 	height: 100vh;
 }
+.App_notAllowed {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100vh;
+}
+.App_notAllowed span {
+	border: 2px solid black;
+	padding: 5px 20px;
+}

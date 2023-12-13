@@ -8,15 +8,29 @@ import './App.css'
 
 import AuthProvider from './components/AuthProvider/AuthProvider'
 
-const App = () => (
-	<AuthProvider>
-		<StyledEngineProvider injectFirst>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Router />
-			</ThemeProvider>
-		</StyledEngineProvider>
-	</AuthProvider>
-)
+const App = () => {
+	const allowedWidth = 800
+
+	if (window.innerWidth < allowedWidth) {
+		return (
+			<div className='App_notAllowed'>
+				<span>
+					<h1>Sorry, but for now this website is not available on mobile devices</h1>
+				</span>
+			</div>
+		)
+	}
+
+	return (
+		<AuthProvider>
+			<StyledEngineProvider injectFirst>
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<Router />
+				</ThemeProvider>
+			</StyledEngineProvider>
+		</AuthProvider>
+	)
+}
 
 export default App
