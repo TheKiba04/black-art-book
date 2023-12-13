@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import Avatar from '@mui/material/Avatar'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'

@@ -24,7 +24,6 @@ export const useStyles = makeStyles({
 		display: 'flex',
 		justifyContent: 'space-between',
 		aignItems: 'flex-end',
-		// width: '100%',
 		backgroundColor: theme.palette.primary.main,
 		padding: '5px 10px',
 	},
