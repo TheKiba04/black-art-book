@@ -34,4 +34,13 @@ export const useStyles = makeStyles({
 		paddingTop: '0 !important',
 		paddingBottom: '8px !important',
 	},
+	badge: {
+		'& .MuiBadge-badge': {
+			right: -3,
+			top: 1,
+			border: `2px solid ${theme.palette.background.paper}`,
+			padding: '0 2px',
+			fontSize: '0.6rem',
+		},
+	},
 })

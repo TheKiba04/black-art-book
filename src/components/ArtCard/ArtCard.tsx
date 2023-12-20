@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import Badge from '@mui/material/Badge'
+import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -9,9 +11,11 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
 import { removeLike, setLike, trimString } from '@/helpers/common'
+import { getComments } from '@/helpers/database'
 import { Art } from '@/types/Art'
 import { User } from '@/types/User'
 
+import CommentIcon from '@mui/icons-material/Comment'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
@@ -25,7 +29,10 @@ interface ArtCardProps {
 }
 
 const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
+	const BADGE_INVISIBILITY_LIMIT = 1
+	const BADGE_BASIC_COUNT = 0
 	const [likes, setLikes] = useState<string[]>(art.likes)
+	const [commentsCount, setCommentsCount] = useState<number>(BADGE_BASIC_COUNT)
 	const styles = useStyles()
 	const allowedSymbols = 80
 
@@ -57,6 +64,10 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 			}
 		}
 
+	useEffect(() => {
+		getComments(art.comments).then((comments) => setCommentsCount(comments.length))
+	}, [art])
+
 	return (
 		<Grid item>
 			<Card className={styles.recentArtsCard} onClick={handleClick}>
@@ -82,19 +93,33 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 							Author: {art.createdBy.name}
 						</Typography>
 					)}
-					<div>
-						<Typography variant='caption' color='text.secondary'>
-							{likes.length}
-						</Typography>
+					<Box>
 						<IconButton
 							id={art.uid}
 							className={styles.recentArtsButton}
 							size='small'
 							onClick={handleClickLike(likes)}
 						>
-							{renderLikeIcon(likes)}
+							<Badge
+								className={styles.badge}
+								badgeContent={likes.length}
+								color='secondary'
+								invisible={likes.length <= BADGE_INVISIBILITY_LIMIT}
+							>
+								{renderLikeIcon(likes)}
+							</Badge>
 						</IconButton>
-					</div>
+						<IconButton className={styles.recentArtsButton} size='small'>
+							<Badge
+								className={styles.badge}
+								badgeContent={commentsCount}
+								color='secondary'
+								invisible={commentsCount <= BADGE_INVISIBILITY_LIMIT}
+							>
+								<CommentIcon />
+							</Badge>
+						</IconButton>
+					</Box>
 				</CardActions>
 			</Card>
 		</Grid>

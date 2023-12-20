@@ -14,11 +14,7 @@ const Home = () => {
 	}
 
 	useEffect(() => {
-		getAllArts().then((arts: unknown | Art[]) => {
-			// eslint-disable-next-line no-console
-			console.log(arts)
-			setRecentArts(arts as Art[])
-		})
+		getAllArts().then((arts: unknown | Art[]) => setRecentArts(arts as Art[]))
 	}, [])
 
 	return (
