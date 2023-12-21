@@ -13,6 +13,7 @@ import {
 import { isEmpty } from 'lodash'
 
 import { database } from '@/config/firebase'
+import { Art } from '@/types/Art'
 import { Comment } from '@/types/Comment'
 import { User } from '@/types/User'
 
@@ -30,11 +31,11 @@ export const createUser = async (userId: string, data: object) => {
 export const createArt = async (userId: string, data: object, file: File) => {
 	try {
 		const artURL = await uploadImage(userId, file)
-		const commentsRef = await addDoc(collection(database, 'comments'), { list: [] })
+		// const commentsRef = await addDoc(collection(database, 'comments'), { list: [] })
 
 		const artRef = await addDoc(collection(database, 'arts'), {
 			...data,
-			...{ artURL: artURL, comments: commentsRef.id },
+			artURL: artURL,
 		}).then(async (docRef) => {
 			await updateDoc(docRef, { uid: docRef.id })
 
@@ -52,85 +53,146 @@ export const createArt = async (userId: string, data: object, file: File) => {
 	}
 }
 
+// Comment
+export const createComment = async (data: Comment) => {
+	try {
+		const commentsRef = await addDoc(collection(database, 'comments'), data).then(
+			async (docRef) => {
+				await updateDoc(docRef, { uid: docRef.id })
+
+				return docRef
+			}
+		)
+
+		await updateDoc(doc(database, 'arts', data.artId), {
+			comments: arrayUnion(commentsRef.id),
+		})
+
+		const newCommentRef = doc(database, 'comments', commentsRef.id)
+		const commentSnapshot = await getDoc(newCommentRef)
+		const commentData = commentSnapshot?.data() ?? null
+
+		return commentData as Comment
+	} catch (error) {
+		loggerErr(error)
+
+		return null
+	}
+}
+
 // GET REQUESTS
 // User
 export const getUser = async (userId: string) => {
-	const docRef = doc(database, 'users', userId)
-	const docSnapshot = await getDoc(docRef)
+	try {
+		const docRef = doc(database, 'users', userId)
+		const docSnapshot = await getDoc(docRef)
 
-	return (docSnapshot?.data() as User) ?? null
-}
+		return (docSnapshot?.data() as User) ?? null
+	} catch (error) {
+		loggerErr(error)
 
-export const getUserArts = async (userId: string) => {
-	const docRef = doc(database, 'users', userId)
-	const docSnapshot = await getDoc(docRef)
-	const artList = docSnapshot?.data()?.artList ?? []
-
-	if (!isEmpty(artList)) {
-		return await Promise.all(
-			artList.map(async (ref: string) => {
-				const artRef = doc(database, 'arts', ref)
-				const artSnapshot = await getDoc(artRef)
-				const artData = artSnapshot?.data() ?? null
-
-				return artData
-			})
-		)
+		return null
 	}
-
-	return []
 }
 
 // Art
 export const getAllArts = async () => {
-	const itemsLimit = 9
-	const q = query(collection(database, 'arts'), limit(itemsLimit))
-	const querySnapshot = await getDocs(q)
-	const allArts = querySnapshot.docs.map((doc) => doc.data())
+	try {
+		const itemsLimit = 9
+		const q = query(collection(database, 'arts'), limit(itemsLimit))
+		const querySnapshot = await getDocs(q)
+		const allArts = querySnapshot.docs.map((doc) => doc.data()) as Art[]
 
-	return allArts
+		return allArts
+	} catch (error) {
+		loggerErr(error)
+
+		return []
+	}
+}
+
+// eslint-disable-next-line complexity
+export const getUserArts = async (userId: string) => {
+	try {
+		const docRef = doc(database, 'users', userId)
+		const docSnapshot = await getDoc(docRef)
+		const artList = docSnapshot?.data()?.artList ?? []
+
+		if (!isEmpty(artList)) {
+			const userArts: Art[] = await Promise.all(
+				artList.map(async (ref: string) => {
+					const artRef = doc(database, 'arts', ref)
+					const artSnapshot = await getDoc(artRef)
+					const artData = (artSnapshot?.data() as Art) ?? null
+
+					return artData
+				})
+			)
+
+			return userArts
+		}
+
+		return []
+	} catch (error) {
+		loggerErr(error)
+
+		return []
+	}
 }
 
 // Comment
 
-export const getComments = async (commentId: string) => {
-	const docRef = doc(database, 'comments', commentId)
-	const docSnapshot = await getDoc(docRef)
+export const getComments = async (commentsId: string[]) => {
+	try {
+		if (!isEmpty(commentsId)) {
+			const comments: Comment[] = await Promise.all(
+				commentsId.map(async (ref: string) => {
+					const commentRef = doc(database, 'comments', ref)
+					const commentSnapshot = await getDoc(commentRef)
+					const commentData = commentSnapshot?.data() ?? null
 
-	return docSnapshot?.data()!.list || []
+					return commentData as Comment
+				})
+			)
+
+			return comments
+		}
+	} catch (error) {
+		loggerErr(error)
+
+		return []
+	}
 }
-
-// export const getArt = async (artId: string) => {
-// 	// eslint-disable-next-line no-console
-// 	console.log('here')
-// 	const docRef = doc(database, 'arts', artId)
-
-// 	// eslint-disable-next-line no-console
-// 	console.log(docRef)
-// 	const docSnapshot = await getDoc(docRef)
-
-// 	return docSnapshot?.data()
-// }
 
 // PUT REQUESTS
 // User
+export const updateUser = async (userId: string, data: object) => {
+	const userRef = doc(database, 'users', userId)
 
+	await updateDoc(userRef, { ...data })
+}
 // Art
 export const updateArt = async (artId: string, data: object) => {
 	const artRef = doc(database, 'arts', artId)
 
-	await updateDoc(artRef, data)
+	await updateDoc(artRef, { ...data })
 }
 
 // Comment
 
-export const updateComments = async (commentId: string, data: Comment) => {
+export const updateComment = async (commentId: string, data: object) => {
 	const commentsRef = doc(database, 'comments', commentId)
 
-	await updateDoc(commentsRef, {
-		list: arrayUnion(data),
-	})
+	await updateDoc(commentsRef, { ...data })
 }
+
+// export const updateCommentLike = async (commentId: string, data: Comment) => {
+// 	const commentsRef = doc(database, 'comments', commentId)
+
+// 	await updateDoc(commentsRef, {
+// 		list: arrayUnion(data),
+// 	})
+// }
 // export const updateData = async (userId: string, docName: string, data: object) => {
 // 	const userRef = doc(database, docName, userId)
 

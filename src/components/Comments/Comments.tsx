@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash'
 import moment from 'moment'
 
 import CommentItem from '@/components/CommentItem/CommentItem'
-import { getComments, updateComments } from '@/helpers/database'
+import { createComment, getComments } from '@/helpers/database'
 import { useAuth } from '@/hooks/useAuth'
 import { Art } from '@/types/Art'
 import { Comment } from '@/types/Comment'
@@ -20,9 +20,9 @@ interface CommentsProps {
 const Comments = ({ currentArt }: CommentsProps) => {
 	const user = useAuth()
 	const [comments, setComments] = useState<Comment[]>([])
-	const handleComment = async (comment: string) => {
+	const handleCreateComment = async (comment: string) => {
 		if (user) {
-			const newComment = {
+			const newComment: Comment = {
 				artId: currentArt.uid,
 				userId: user.uid,
 				comment: comment,
@@ -31,8 +31,9 @@ const Comments = ({ currentArt }: CommentsProps) => {
 				updatedAt: moment().format(),
 			}
 
-			await updateComments(currentArt.comments, newComment)
-			setComments((prev) => [...prev, newComment])
+			const createdComment = await createComment(newComment)
+
+			createdComment && setComments((prev) => [...prev, createdComment])
 		}
 	}
 
@@ -44,7 +45,7 @@ const Comments = ({ currentArt }: CommentsProps) => {
 		<Grid container spacing={1}>
 			{user && (
 				<Grid item xs={12}>
-					<CommentInput onAddComment={handleComment} />
+					<CommentInput onAddComment={handleCreateComment} />
 				</Grid>
 			)}
 			<Grid item xs={12}>
@@ -62,7 +63,7 @@ const Comments = ({ currentArt }: CommentsProps) => {
 				) : (
 					<Grid container justifyContent='center'>
 						{comments
-							.map((comment) => <CommentItem key={comment.createdAt} comment={comment} />)
+							.map((comment) => <CommentItem key={comment.uid} comment={comment} />)
 							.reverse()}
 					</Grid>
 				)}

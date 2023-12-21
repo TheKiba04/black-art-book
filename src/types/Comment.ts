@@ -1,4 +1,5 @@
 export interface Comment {
+	uid?: string
 	artId: string
 	userId: string
 	comment: string

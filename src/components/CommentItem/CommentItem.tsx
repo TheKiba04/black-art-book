@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
 
 import Avatar from '@mui/material/Avatar'
+import Badge from '@mui/material/Badge'
 import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
-import { getInitials } from '@/helpers/common'
+import { getInitials, removeCommentLike, setCommentLike } from '@/helpers/common'
 import { getUser } from '@/helpers/database'
+import { useAuth } from '@/hooks/useAuth'
 import { Comment } from '@/types/Comment'
 import { User } from '@/types/User'
+
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
 import { useStyles } from './CommentItem.styles'
 interface CommentItemProps {
@@ -16,7 +22,34 @@ interface CommentItemProps {
 }
 const CommentItem = ({ comment }: CommentItemProps) => {
 	const styles = useStyles()
+	const BADGE_INVISIBILITY_LIMIT = 1
+	const [likes, setLikes] = useState<string[]>(comment.likes)
 	const [commentator, setCommentator] = useState<User | null>(null)
+	const user = useAuth()
+
+	const renderLikeIcon = (likes: string[]) =>
+		user && likes.includes(user.uid) ? <FavoriteIcon /> : <FavoriteBorderIcon />
+
+	const handleRemoveLike = (id: string, uid: string) => {
+		removeCommentLike(id, uid)
+		setLikes((prev) => prev.filter((like) => like !== uid))
+	}
+
+	const handleSetLike = (id: string, uid: string) => {
+		setCommentLike(id, uid)
+		setLikes((prev) => [...prev, uid])
+	}
+	const handleClickLike =
+		(likes: string[]) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			event.stopPropagation()
+			const id = event.currentTarget.id
+
+			if (user) {
+				const l = likes.includes(user.uid)
+
+				return l ? handleRemoveLike(id, user.uid) : handleSetLike(id, user.uid)
+			}
+		}
 
 	useEffect(() => {
 		getUser(comment.userId).then((user) => setCommentator(user))
@@ -44,10 +77,37 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 									{comment.comment}
 								</Typography>
 							</Grid>
-							<Grid item xs={12} textAlign='end'>
-								<Typography variant='caption' fontStyle='italic' color='secondary.main'>
-									{moment(comment.updatedAt).fromNow()}
-								</Typography>
+							<Grid
+								container
+								item
+								xs={12}
+								textAlign='end'
+								display='flex'
+								justifyContent='flex-end'
+								alignItems='center'
+							>
+								<Grid item>
+									<IconButton
+										id={comment.uid}
+										className={styles.commentItemButton}
+										size='small'
+										onClick={handleClickLike(likes)}
+									>
+										<Badge
+											className={styles.badge}
+											badgeContent={likes.length}
+											color='secondary'
+											invisible={likes.length <= BADGE_INVISIBILITY_LIMIT}
+										>
+											{renderLikeIcon(likes)}
+										</Badge>
+									</IconButton>
+								</Grid>
+								<Grid item>
+									<Typography variant='caption' fontStyle='italic' color='secondary.main'>
+										{moment(comment.updatedAt).fromNow()}
+									</Typography>
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>

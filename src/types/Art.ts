@@ -8,5 +8,5 @@ export interface Art {
 		name: string
 	}
 	likes: string[]
-	comments: string
+	comments: string[]
 }

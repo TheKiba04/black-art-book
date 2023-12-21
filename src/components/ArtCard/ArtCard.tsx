@@ -74,7 +74,7 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 				<div>
 					<CardMedia className={styles.recentArtsImage} sx={{ height: 320 }} image={art.artURL} />
 					<CardContent className={styles.recentArtsCardContent}>
-						<Typography gutterBottom variant='h5' component='div'>
+						<Typography gutterBottom variant='h6' fontWeight='bold' component='div'>
 							{art.name}
 						</Typography>
 						<Typography variant='body2' color='text.secondary'>

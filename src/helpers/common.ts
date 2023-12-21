@@ -1,6 +1,10 @@
 import { arrayRemove, arrayUnion } from 'firebase/firestore'
 
-import { updateArt } from './database'
+import {
+	updateArt,
+	updateComment,
+	// , updateComment
+} from './database'
 
 export const getInitials = (name: string | undefined | null) => {
 	if (!name) return 'U'
@@ -24,5 +28,15 @@ export const setLike = async (artId: string, userId: string) =>
 
 export const removeLike = async (artId: string, userId: string) =>
 	await updateArt(artId, {
+		likes: arrayRemove(userId),
+	})
+
+export const setCommentLike = async (commentId: string, userId: string) =>
+	await updateComment(commentId, {
+		likes: arrayUnion(userId),
+	})
+
+export const removeCommentLike = async (commentId: string, userId: string) =>
+	await updateComment(commentId, {
 		likes: arrayRemove(userId),
 	})

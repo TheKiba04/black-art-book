@@ -37,7 +37,12 @@ const ArtModal = ({ onClose, art }: ArtModalProps) => {
 						<img src={art.artURL} className={styles.artModalImage} alt={art.name} />
 					</Grid>
 					<Grid item xs={12}>
-						<Typography variant='h5' fontStyle='italic' color='secondary.main'>
+						<Typography
+							variant='h5'
+							fontStyle='italic'
+							color='secondary.main'
+							whiteSpace='pre-line'
+						>
 							{art.description}
 						</Typography>
 					</Grid>
