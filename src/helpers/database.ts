@@ -156,6 +156,8 @@ export const getComments = async (commentsId: string[]) => {
 			)
 
 			return comments
+		} else {
+			return []
 		}
 	} catch (error) {
 		loggerErr(error)
