@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
 			alignItems: 'center',
 			justifyContent: 'center',
 			// width: '100%',
-			maxWidth: '1400px',
+			maxWidth: '1000px',
 			// maxHeight: '900px!important',
 			// minWidth: '900px',
 		},
@@ -40,7 +40,7 @@ export const useStyles = makeStyles({
 		maxHeight: '800px',
 		maxWidth: 'inherit',
 
-		// width: '100%',
+		width: '100%',
 		// height: '100%',
 
 		// [theme.breakpoints.up('xl')]: {

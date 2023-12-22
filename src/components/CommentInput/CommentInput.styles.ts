@@ -16,7 +16,7 @@ export const useStyles = makeStyles({
 		flexDirection: 'row',
 		alignItems: 'flex-end',
 		justifyContent: 'center',
-		width: '50%',
+		width: '100%',
 		backgroundColor: theme.palette.primary.contrastText,
 		padding: '2px 20px 5px',
 		borderRadius: '5px',

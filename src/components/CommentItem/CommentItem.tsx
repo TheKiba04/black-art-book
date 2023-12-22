@@ -57,15 +57,15 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 
 	return (
 		commentator && (
-			<Grid container item xs={12} md={6} className={styles.commentItemWrapper}>
-				<Grid item xs={1}>
+			<Grid container item xs={12} md={12} className={styles.commentItemWrapper}>
+				<Grid item px={2}>
 					<Avatar>
 						<Typography variant='body1' color='secondary.dark'>
 							{getInitials(commentator.fullname)}
 						</Typography>
 					</Avatar>
 				</Grid>
-				<Grid item xs={11}>
+				<Grid item xs={11} px={1}>
 					<Grid container className={styles.commentItemContainer}>
 						<Grid item xs={12}>
 							<Typography color='secondary.main'>{commentator.fullname}</Typography>
@@ -84,7 +84,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 								textAlign='end'
 								display='flex'
 								justifyContent='flex-end'
-								alignItems='center'
+								alignItems='flex-end'
 							>
 								<Grid item>
 									<IconButton

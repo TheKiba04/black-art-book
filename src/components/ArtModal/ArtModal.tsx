@@ -32,13 +32,13 @@ const ArtModal = ({ onClose, art }: ArtModalProps) => {
 				</IconButton>
 			</DialogTitle>
 			<DialogContent className={styles.artModalContent}>
-				<Grid container spacing={3} pt={1}>
-					<Grid item xs={12} textAlign='center'>
+				<Grid container spacing={3} pt={1} justifyContent='center'>
+					<Grid item textAlign='center'>
 						<img src={art.artURL} className={styles.artModalImage} alt={art.name} />
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={10}>
 						<Typography
-							variant='h5'
+							variant='caption'
 							fontStyle='italic'
 							color='secondary.main'
 							whiteSpace='pre-line'
