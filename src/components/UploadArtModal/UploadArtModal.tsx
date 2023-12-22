@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { useEffect, useRef, useState } from 'react'
 
 import Button from '@mui/material/Button'
@@ -30,6 +31,7 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 	const [fileSrc, setFileSrc] = useState<string | null>(null)
 	const [artName, setArtName] = useState<string>('')
 	const [artDescr, setArtDescr] = useState<string>('')
+	const [formError, setFormError] = useState<boolean>(false)
 
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
@@ -55,10 +57,10 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 	const handleClose = () => {
 		setFile(null)
 		setFileSrc(null)
+		setFormError(false)
 		onClose()
 		handlePopoverClose()
 	}
-	// eslint-disable-next-line complexity
 	const handleUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const inputElement = event.target as HTMLInputElement
 
@@ -68,11 +70,16 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 	}
 
 	const handleConfirm = async () => {
-		if (file) {
+		if (!file) {
+			handlePopoverOpen()
+		} else {
+			if (!artName || !artDescr) {
+				setFormError(true)
+
+				return
+			}
 			await onSubmit(file, artName, artDescr)
 			handleClose()
-		} else {
-			handlePopoverOpen()
 		}
 	}
 
@@ -86,16 +93,12 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 				<DialogTitle className={styles.uploadArtModalTitle}>{title}</DialogTitle>
 				<DialogContent className={styles.uploadArtModalContent}>
 					<DialogContentText>{contentText}</DialogContentText>
-					<Button
-						component='label'
-						className={styles.uploadArtModalUploadContainer}
-						ref={uploadRef}
-					>
+					<Button component='label' className={styles.uploadArtModalUploadContainer}>
 						<input type='file' hidden onChange={handleUploadImage} />
 						{fileSrc ? (
 							<img id='uploadedImage' src={fileSrc} />
 						) : (
-							<ControlPointIcon width='50px' height='50px' />
+							<ControlPointIcon width='50px' height='50px' ref={uploadRef} />
 						)}
 					</Button>
 					<TextField
@@ -105,6 +108,8 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 						variant='standard'
 						value={artName}
 						onChange={handleChangeName}
+						error={formError && artName === ''}
+						helperText={formError && artName === '' ? 'Please enter art name' : ''}
 					/>
 					<TextField
 						fullWidth
@@ -114,6 +119,8 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 						multiline
 						value={artDescr}
 						onChange={handleChangeDescr}
+						error={formError && artDescr === ''}
+						helperText={formError && artDescr === '' ? 'Please enter description' : ''}
 					/>
 				</DialogContent>
 				<DialogActions className={styles.uploadArtModalActions}>
