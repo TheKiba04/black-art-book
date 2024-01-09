@@ -13,7 +13,7 @@ interface UploadArtProps {
 }
 
 const UploadArt = ({ onAddArts }: UploadArtProps) => {
-	const user = useAuth()
+	const { user } = useAuth()
 	const [open, setOpen] = useState(false)
 
 	const handleUploadArt = async (file: File, name: string, description: string) => {

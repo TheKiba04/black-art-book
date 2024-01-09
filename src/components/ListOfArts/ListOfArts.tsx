@@ -18,7 +18,7 @@ interface ListOfArtsProps {
 	onAddArts: (art: Art) => void
 }
 const ListOfArts = ({ title, list, personal, onAddArts }: ListOfArtsProps) => {
-	const user = useAuth()
+	const { user } = useAuth()
 	const [selectedArt, setSelectedArt] = useState<Art | null>(null)
 
 	const handleSelectArt = (art: Art) => {

@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { Art } from '@/types/Art'
 
 const Profile = () => {
-	const user = useAuth()
+	const { user } = useAuth()
 	const [arts, setArts] = useState<Art[] | []>([])
 
 	const addArts = (art: Art) => {
@@ -23,7 +23,7 @@ const Profile = () => {
 
 	return (
 		<>
-			<Passport user={user} />
+			<Passport/>
 			<BlockDivider />
 			<ListOfArts title='My Arts' personal list={arts} onAddArts={addArts} />
 		</>

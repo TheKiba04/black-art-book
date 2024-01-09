@@ -1,5 +1,7 @@
+import { updateProfile } from 'firebase/auth'
 import {
 	addDoc,
+	arrayRemove,
 	arrayUnion,
 	collection,
 	doc,
@@ -12,26 +14,24 @@ import {
 } from 'firebase/firestore'
 import { isEmpty } from 'lodash'
 
-import { database } from '@/config/firebase'
+import { auth, database } from '@/config/firebase'
 import { Art } from '@/types/Art'
 import { Comment } from '@/types/Comment'
 import { User } from '@/types/User'
 
 import { loggerErr } from './logger'
-import { getDefaultUserImage, uploadImage } from './storage'
+import { uploadImage } from './storage'
 
 // POST REQUESTS
 // User
 export const createUser = async (userId: string, data: object) => {
-	const avatarURL = await getDefaultUserImage()
 
-	await setDoc(doc(database, 'users', userId), { ...data, avatarURL })
+	await setDoc(doc(database, 'users', userId), data)
 }
 // Art
 export const createArt = async (userId: string, data: object, file: File) => {
 	try {
 		const artURL = await uploadImage(userId, file)
-		// const commentsRef = await addDoc(collection(database, 'comments'), { list: [] })
 
 		const artRef = await addDoc(collection(database, 'arts'), {
 			...data,
@@ -168,10 +168,38 @@ export const getComments = async (commentsId: string[]) => {
 
 // PUT REQUESTS
 // User
-export const updateUser = async (userId: string, data: object) => {
+export const updateUser = async (userId: string, data: Record<string, string>) => {
 	const userRef = doc(database, 'users', userId)
 
+	auth.currentUser &&
+		(await updateProfile(auth.currentUser, {
+			displayName: data.fullname as string,
+		}))
 	await updateDoc(userRef, { ...data })
+}
+
+export const updateUserWithAvatar = async (
+	userId: string,
+	data: Record<string, string | File | null>
+) => {
+	try {
+		const updatedAvatarURL = await uploadImage(userId, data.avatarFile as File)
+
+		auth.currentUser &&
+			(await updateProfile(auth.currentUser, {
+				displayName: data.fullname as string,
+				photoURL: updatedAvatarURL,
+			}))
+		const userRef = doc(database, 'users', userId)
+
+		await updateDoc(userRef, {
+			fullname: data.fullname,
+			avatarURL: updatedAvatarURL,
+			description: data.description,
+		})
+	} catch (err) {
+		loggerErr(err)
+	}
 }
 // Art
 export const updateArt = async (artId: string, data: object) => {
@@ -226,3 +254,23 @@ export const updateComment = async (commentId: string, data: object) => {
 // 		[arrayName]: arrayUnion(data),
 // 	})
 // }
+
+export const setLike = async (artId: string, userId: string) =>
+	await updateArt(artId, {
+		likes: arrayUnion(userId),
+	})
+
+export const removeLike = async (artId: string, userId: string) =>
+	await updateArt(artId, {
+		likes: arrayRemove(userId),
+	})
+
+export const setCommentLike = async (commentId: string, userId: string) =>
+	await updateComment(commentId, {
+		likes: arrayUnion(userId),
+	})
+
+export const removeCommentLike = async (commentId: string, userId: string) =>
+	await updateComment(commentId, {
+		likes: arrayRemove(userId),
+	})

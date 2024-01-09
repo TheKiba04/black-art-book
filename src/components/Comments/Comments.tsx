@@ -18,7 +18,7 @@ interface CommentsProps {
 }
 
 const Comments = ({ currentArt }: CommentsProps) => {
-	const user = useAuth()
+	const { user } = useAuth()
 	const [comments, setComments] = useState<Comment[]>([])
 	const handleCreateComment = async (comment: string) => {
 		if (user) {

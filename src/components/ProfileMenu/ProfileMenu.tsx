@@ -5,9 +5,8 @@ import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import Typography from '@mui/material/Typography'
+import { Theme } from '@mui/material/styles'
 
-import { getInitials } from '@/helpers/common'
 import { User } from '@/types/User'
 
 const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => {
@@ -35,14 +34,21 @@ const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => 
 
 	const navigateToProfile = () => handleMove('/profile')
 
+	const stringAvatar = (name: string) => ({
+		sx: {
+			color: (theme: Theme) => theme.palette.secondary.dark,
+		},
+		children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+	})
+
 	return (
 		<>
 			<IconButton onClick={handleOpen}>
-				<Avatar>
-					<Typography variant='body1' color='secondary.dark'>
+				<Avatar {...stringAvatar(user.fullname)} alt={user.fullname} src={user.avatarURL} />
+				{/* <Typography variant='body1' color='secondary.dark'>
 						{getInitials(user.fullname)}
-					</Typography>
-				</Avatar>
+					</Typography> */}
+				{/* </Avatar> */}
 			</IconButton>
 			<Menu
 				anchorEl={anchorEl}

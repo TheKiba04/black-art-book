@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '@mui/material/Button'
@@ -6,13 +5,13 @@ import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 
-import { AuthContext } from '@/components/AuthProvider/AuthProvider'
 import Logo from '@/components/Logo/Logo'
 import ProfileMenu from '@/components/ProfileMenu/ProfileMenu'
 import { signout } from '@/helpers/auth'
+import { useAuth } from '@/hooks/useAuth'
 
 const Header = () => {
-	const user = useContext(AuthContext)
+	const { user } = useAuth()
 	const navigate = useNavigate()
 
 	const navigateToSignIn = () => navigate('/signin')

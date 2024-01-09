@@ -7,8 +7,8 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
-import { getInitials, removeCommentLike, setCommentLike } from '@/helpers/common'
-import { getUser } from '@/helpers/database'
+import { getInitials } from '@/helpers/common'
+import { getUser, removeCommentLike, setCommentLike } from '@/helpers/database'
 import { useAuth } from '@/hooks/useAuth'
 import { Comment } from '@/types/Comment'
 import { User } from '@/types/User'
@@ -25,7 +25,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 	const BADGE_INVISIBILITY_LIMIT = 1
 	const [likes, setLikes] = useState<string[]>(comment.likes)
 	const [commentator, setCommentator] = useState<User | null>(null)
-	const user = useAuth()
+	const { user } = useAuth()
 
 	const renderLikeIcon = (likes: string[]) =>
 		user && likes.includes(user.uid) ? <FavoriteIcon /> : <FavoriteBorderIcon />

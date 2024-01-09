@@ -10,8 +10,8 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
-import { removeLike, setLike, trimString } from '@/helpers/common'
-import { getComments } from '@/helpers/database'
+import { trimString } from '@/helpers/common'
+import { getComments, removeLike, setLike } from '@/helpers/database'
 import { Art } from '@/types/Art'
 import { User } from '@/types/User'
 

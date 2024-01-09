@@ -43,7 +43,7 @@ export const signup = async ({ email, password, firstName, lastName }: IUser) =>
 
 export const signin = async ({ email, password }: IUser) =>
 	await signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => userCredential.user)
+		// .then((userCredential) => userCredential.user)
 		.catch((error) => {
 			const errorCode = error.code
 			const errorMessage = error.message
