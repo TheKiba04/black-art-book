@@ -9,9 +9,9 @@ import { Art } from '@/types/Art'
 const Home = () => {
 	const [recentArts, setRecentArts] = useState<Art[] | []>([])
 
-	const addArts = (art: Art) => {
-		setRecentArts((prev) => [...prev, art])
-	}
+	// const addArts = (art: Art) => {
+	// 	setRecentArts((prev) => [...prev, art])
+	// }
 
 	useEffect(() => {
 		getAllArts().then((arts: unknown | Art[]) => setRecentArts(arts as Art[]))
@@ -21,7 +21,11 @@ const Home = () => {
 		<>
 			<Heading />
 			<BlockDivider />
-			<ListOfArts title='Recent Arts' list={recentArts} onAddArts={addArts} />
+			<ListOfArts
+				title='Recent Arts'
+				list={recentArts}
+				// onAddArts={addArts}
+			/>
 		</>
 	)
 }

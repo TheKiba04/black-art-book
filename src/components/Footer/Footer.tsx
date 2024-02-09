@@ -15,7 +15,7 @@ const Footer = () => {
 			alignItems='center'
 			p={2}
 		>
-			<Typography variant='body2' align='center'>
+			<Typography variant='body1' align='center'>
 				© 2023 Art Gallery
 			</Typography>
 		</Grid>

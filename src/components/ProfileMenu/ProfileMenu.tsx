@@ -38,7 +38,8 @@ const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => 
 		sx: {
 			color: (theme: Theme) => theme.palette.secondary.dark,
 		},
-		children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+		children: `${name.split(' ')[0][0]}`,
+		// children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
 	})
 
 	return (

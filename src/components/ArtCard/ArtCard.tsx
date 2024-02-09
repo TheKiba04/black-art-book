@@ -77,7 +77,7 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 						<Typography gutterBottom variant='h6' fontWeight='bold' component='div'>
 							{art.name}
 						</Typography>
-						<Typography variant='body2' color='text.secondary'>
+						<Typography variant='body1' color='text.secondary'>
 							{trimString(art.description, allowedSymbols)}
 						</Typography>
 					</CardContent>
@@ -90,7 +90,7 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 				>
 					{!isPersonal && (
 						<Typography variant='caption' color='text.secondary'>
-							Author: {art.createdBy.name}
+							Author: {art.createdBy}
 						</Typography>
 					)}
 					<Box>

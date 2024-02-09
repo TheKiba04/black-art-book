@@ -11,9 +11,9 @@ const Profile = () => {
 	const { user } = useAuth()
 	const [arts, setArts] = useState<Art[] | []>([])
 
-	const addArts = (art: Art) => {
-		setArts((prev) => [...prev, art])
-	}
+	// const addArts = (art: Art) => {
+	// 	setArts((prev) => [...prev, art])
+	// }
 
 	useEffect(() => {
 		if (user) {
@@ -23,9 +23,14 @@ const Profile = () => {
 
 	return (
 		<>
-			<Passport/>
+			<Passport />
 			<BlockDivider />
-			<ListOfArts title='My Arts' personal list={arts} onAddArts={addArts} />
+			<ListOfArts
+				title='My Arts'
+				personal
+				list={arts}
+				//  onAddArts={addArts}
+			/>
 		</>
 	)
 }

@@ -76,10 +76,10 @@ const EditPassword = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 
 	return (
 		<Grid container spacing={4} pt={3}>
-			<Grid item xs={3} textAlign='left'>
+			<Grid item xs={4} textAlign='center'>
 				<UploadImage fileSrc={fileSrc} onUpload={handleUploadImage} />
 			</Grid>
-			<Grid container item xs={7}>
+			<Grid container item xs={6}>
 				<Grid item>
 					<TextField
 						id='name'

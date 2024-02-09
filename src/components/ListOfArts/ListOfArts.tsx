@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import { map } from 'lodash'
 
 import ArtCard from '@/components/ArtCard/ArtCard'
-import UploadArt from '@/components/UploadArt/UploadArt'
+// import UploadArt from '@/components/UploadArt/UploadArt'
 import { useAuth } from '@/hooks/useAuth'
 import { Art } from '@/types/Art'
 
@@ -15,9 +15,11 @@ interface ListOfArtsProps {
 	title: string
 	list: Art[] | []
 	personal?: boolean
-	onAddArts: (art: Art) => void
+	// onAddArts: (art: Art) => void
 }
-const ListOfArts = ({ title, list, personal, onAddArts }: ListOfArtsProps) => {
+const ListOfArts = ({ title, list, personal,
+	//  onAddArts
+	 }: ListOfArtsProps) => {
 	const { user } = useAuth()
 	const [selectedArt, setSelectedArt] = useState<Art | null>(null)
 
@@ -35,7 +37,7 @@ const ListOfArts = ({ title, list, personal, onAddArts }: ListOfArtsProps) => {
 		<>
 			<Grid container spacing={4} pt={3}>
 				<Grid item xs={12} textAlign='right' display='flex' gap={3} justifyContent='flex-end'>
-					{personal && <UploadArt onAddArts={onAddArts} />}
+					{/* {personal && <UploadArt onAddArts={onAddArts} />} */}
 					<Typography variant='h5' fontStyle='italic' color='secondary.main'>
 						{title}
 					</Typography>

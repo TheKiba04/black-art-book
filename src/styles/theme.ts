@@ -6,18 +6,25 @@ const themeOptions: ThemeOptions = {
 			main: '#e6e6e6',
 			dark: '#262626',
 			contrastText: '#ffffff',
+			light: '#ffffff',
 		},
 		secondary: {
 			main: '#737373',
 			dark: '#404040',
+			light: '#bfbfbf',
 		},
 		background: {
 			// default: '#d9d9d9',
 			default: '#E8EAEB',
+			paper: '#ffffff',
 		},
 		text: {
 			primary: '#262626',
 			secondary: '#000000',
+		},
+		action: {
+			disabledBackground: '#404040',
+			disabled: '#ffffff',
 		},
 	},
 	typography: {
@@ -27,6 +34,19 @@ const themeOptions: ThemeOptions = {
 		},
 		h6: {
 			fontStyle: 'italic',
+		},
+		body1: {
+			fontSize: '.9rem',
+		},
+		body2: {
+			fontFamily: 'Rubik Mono One',
+			fontWeight: 400,
+			fontSize: '1.3rem',
+		},
+		subtitle2: {
+			fontFamily: 'Rubik Mono One',
+			fontWeight: 200,
+			fontSize: '.8rem',
 		},
 	},
 	components: {
@@ -53,6 +73,11 @@ const themeOptions: ThemeOptions = {
 						backgroundColor: '#e6e6e6',
 						color: '#262626',
 						border: '1px solid #262626',
+					},
+					'&:disabled': {
+						backgroundColor: '#737373',
+						color: '#ffffff',
+						border: '1px solid #737373',
 					},
 				},
 			},

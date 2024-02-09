@@ -17,7 +17,7 @@ import { signup } from '@/helpers/auth'
 import LockIcon from '@mui/icons-material/Lock'
 
 const Copyright = () => (
-	<Typography variant='body2' color='text.secondary' align='center' sx={{ mt: 5 }}>
+	<Typography variant='body1' color='text.secondary' align='center' sx={{ mt: 5 }}>
 		{'Copyright © '}
 		<Link color='inherit' href='/'>
 			Your Website
@@ -117,7 +117,7 @@ export const SignUp = () => {
 					</Button>
 					<Grid container justifyContent='flex-end'>
 						<Grid item>
-							<Link href='/signin' variant='body2'>
+							<Link href='/signin' variant='body1'>
 								Already have an account? Sign in
 							</Link>
 						</Grid>

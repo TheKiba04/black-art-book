@@ -35,7 +35,7 @@ const Header = () => {
 			) : (
 				<Grid item>
 					<Button variant='contained' onClick={navigateToSignIn}>
-						<Typography variant='body2'>Sign In</Typography>
+						<Typography variant='body1'>Sign In</Typography>
 					</Button>
 				</Grid>
 			)}

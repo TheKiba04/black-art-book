@@ -73,7 +73,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 
 						<Grid item container className={styles.commentItemBody}>
 							<Grid item xs={12}>
-								<Typography variant='body2' color='secondary.main' whiteSpace='pre-line'>
+								<Typography variant='body1' color='secondary.main' whiteSpace='pre-line'>
 									{comment.comment}
 								</Typography>
 							</Grid>

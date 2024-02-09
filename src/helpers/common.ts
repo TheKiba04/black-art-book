@@ -14,3 +14,25 @@ export const trimString = (str: string, length: number) => {
 
 	return str.slice(startTrimming, length) + '...'
 }
+
+export const merger = (
+	array1: string[][],
+	array2: (string | null | undefined | boolean | object)[][]
+) =>
+	array1.map((itemArray: string[], arrayIndex: number) =>
+		itemArray.map((item: string, index: number) => ({
+			label: item,
+			checked: !!array2[arrayIndex][index],
+		}))
+	)
+
+export const optionsDecorator = (options: string[]) => {
+	const ZERO = 0
+
+	if (options.length === ZERO) return []
+
+	return options.map((option) => ({
+		label: option,
+		value: option,
+	}))
+}

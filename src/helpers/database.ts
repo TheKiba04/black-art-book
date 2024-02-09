@@ -12,9 +12,11 @@ import {
 	setDoc,
 	updateDoc,
 } from 'firebase/firestore'
-import { isEmpty } from 'lodash'
+import { isEmpty, map } from 'lodash'
+import moment from 'moment'
 
 import { auth, database } from '@/config/firebase'
+import { CustomFormikValues } from '@/pages/CreateArt/CreateArt'
 import { Art } from '@/types/Art'
 import { Comment } from '@/types/Comment'
 import { User } from '@/types/User'
@@ -25,17 +27,26 @@ import { uploadImage } from './storage'
 // POST REQUESTS
 // User
 export const createUser = async (userId: string, data: object) => {
-
 	await setDoc(doc(database, 'users', userId), data)
 }
 // Art
-export const createArt = async (userId: string, data: object, file: File) => {
+export const createArt = async (userId: string, data: CustomFormikValues) => {
 	try {
-		const artURL = await uploadImage(userId, file)
+		const artURL = data.file && (await uploadImage(userId, data.file))
 
 		const artRef = await addDoc(collection(database, 'arts'), {
-			...data,
+			name: data.artName,
+			description: data.artDescription,
 			artURL: artURL,
+			createdBy: userId,
+			likes: [],
+			comments: [],
+			category: data.category?.value,
+			hashtags: map(data.hashtags, (tag) => tag.value),
+			cropped: data.cropped,
+			customized: data.customized,
+			createdAt: moment().format(),
+			updatedAt: moment().format(),
 		}).then(async (docRef) => {
 			await updateDoc(docRef, { uid: docRef.id })
 
@@ -77,6 +88,28 @@ export const createComment = async (data: Comment) => {
 		loggerErr(error)
 
 		return null
+	}
+}
+
+// Category
+export const createCategory = async (category: string) => {
+	try {
+		const newCategory = await addDoc(collection(database, 'categories'), { category })
+
+		return { label: category, value: newCategory.id }
+	} catch (error) {
+		loggerErr(error)
+	}
+}
+
+// HashTag
+export const createHashTag = async (tag: string) => {
+	try {
+		const newHashtag = await addDoc(collection(database, 'hashtags'), { tag })
+
+		return { label: tag, value: newHashtag.id }
+	} catch (error) {
+		loggerErr(error)
 	}
 }
 
@@ -159,6 +192,42 @@ export const getComments = async (commentsId: string[]) => {
 		} else {
 			return []
 		}
+	} catch (error) {
+		loggerErr(error)
+
+		return []
+	}
+}
+
+// Category
+export const getCategories = async () => {
+	try {
+		const q = query(collection(database, 'categories'))
+		const querySnapshot = await getDocs(q)
+		const categories = querySnapshot.docs.map((doc) => ({
+			label: doc.data().category as string,
+			value: doc.id,
+		}))
+
+		return categories
+	} catch (error) {
+		loggerErr(error)
+
+		return []
+	}
+}
+
+// HashTag
+export const getHashTags = async () => {
+	try {
+		const q = query(collection(database, 'hashtags'))
+		const querySnapshot = await getDocs(q)
+		const hashtags = querySnapshot.docs.map((doc) => ({
+			label: doc.data().tag as string,
+			value: doc.id,
+		}))
+
+		return hashtags
 	} catch (error) {
 		loggerErr(error)
 

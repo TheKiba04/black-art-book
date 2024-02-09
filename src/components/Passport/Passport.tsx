@@ -46,7 +46,7 @@ const Passport = () => {
 	return !editMode ? (
 		<Grid container spacing={4} pt={3}>
 			{renderAvatar(currentUser.avatarURL)}
-			<Grid container item xs={7} textAlign='left'>
+			<Grid container item xs={6} textAlign='left'>
 				<Grid item>
 					<Typography variant='h5' fontStyle='italic' color='secondary.main'>
 						{currentUser.fullname}
@@ -58,7 +58,7 @@ const Passport = () => {
 					</Typography>
 				</Grid>
 			</Grid>
-			<Grid item xs={1} textAlign='left'>
+			<Grid item xs={2} textAlign='left'>
 				<Button variant='contained' color='secondary' onClick={handleStartEditMode}>
 					Edit
 				</Button>
