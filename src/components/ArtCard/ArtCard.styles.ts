@@ -19,12 +19,6 @@ export const useStyles = makeStyles({
 		justifyContent: 'space-between',
 		boxShadow: '1px 3px 19px 4px rgba(0,0,0,0.63)',
 		cursor: 'pointer',
-		// '&:hover': {
-		// 	transform: 'scale(1.05)',
-		// 	transition: 'transform .3s ease',
-
-		// 	boxShadow: '1px 3px 40px 30px rgba(255,255,255,0.5)',
-		// },
 	},
 	recentArtsCardContent: {
 		paddingBottom: '0 !important',

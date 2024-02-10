@@ -13,8 +13,7 @@ const themeOptions: ThemeOptions = {
 			dark: '#404040',
 			light: '#bfbfbf',
 		},
-		background: {
-			// default: '#d9d9d9',
+		background: {,
 			default: '#E8EAEB',
 			paper: '#ffffff',
 		},

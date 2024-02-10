@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-// import Checkbox from '@mui/material/Checkbox'
 import Container from '@mui/material/Container'
-// import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
@@ -105,12 +103,6 @@ export const SignUp = () => {
 								autoComplete='new-password'
 							/>
 						</Grid>
-						{/* <Grid item xs={12}>
-							<FormControlLabel
-								control={<Checkbox value='allowExtraEmails' color='primary' />}
-								label='I want to receive inspiration, marketing promotions and updates via email.'
-							/>
-						</Grid> */}
 					</Grid>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
 						Sign Up

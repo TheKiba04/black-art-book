@@ -285,45 +285,6 @@ export const updateComment = async (commentId: string, data: object) => {
 	await updateDoc(commentsRef, { ...data })
 }
 
-// export const updateCommentLike = async (commentId: string, data: Comment) => {
-// 	const commentsRef = doc(database, 'comments', commentId)
-
-// 	await updateDoc(commentsRef, {
-// 		list: arrayUnion(data),
-// 	})
-// }
-// export const updateData = async (userId: string, docName: string, data: object) => {
-// 	const userRef = doc(database, docName, userId)
-
-// 	await updateDoc(userRef, data)
-// }
-
-// export const updateDataArray = async (
-// 	userId: string,
-// 	docName: string,
-// 	arrayName: string,
-// 	data: object
-// ) => {
-// 	const userRef = doc(database, docName, userId)
-
-// 	await updateDoc(userRef, {
-// 		[arrayName]: arrayUnion(data),
-// 	})
-// }
-
-// export const removeDataArray = async (
-// 	userId: string,
-// 	docName: string,
-// 	arrayName: string,
-// 	data: object
-// ) => {
-// 	const userRef = doc(database, docName, userId)
-
-// 	await updateDoc(userRef, {
-// 		[arrayName]: arrayUnion(data),
-// 	})
-// }
-
 export const setLike = async (artId: string, userId: string) =>
 	await updateArt(artId, {
 		likes: arrayUnion(userId),

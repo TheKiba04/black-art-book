@@ -9,7 +9,7 @@ import { getUser } from '@/helpers/database'
 import { useAuth } from '@/hooks/useAuth'
 import { User } from '@/types/User'
 
-import EditPassword from './EditPassword/EditPassword'
+import EditPassport from './EditPassport/EditPassport'
 
 const Passport = () => {
 	const { user } = useAuth()
@@ -65,7 +65,7 @@ const Passport = () => {
 			</Grid>
 		</Grid>
 	) : (
-		<EditPassword user={currentUser} onEdit={handleEndEditMode} />
+		<EditPassport user={currentUser} onEdit={handleEndEditMode} />
 	)
 }
 

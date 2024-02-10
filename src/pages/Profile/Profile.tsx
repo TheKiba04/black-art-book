@@ -11,10 +11,6 @@ const Profile = () => {
 	const { user } = useAuth()
 	const [arts, setArts] = useState<Art[] | []>([])
 
-	// const addArts = (art: Art) => {
-	// 	setArts((prev) => [...prev, art])
-	// }
-
 	useEffect(() => {
 		if (user) {
 			getUserArts(user.uid).then((art: Art[]) => setArts(art))
@@ -29,7 +25,6 @@ const Profile = () => {
 				title='My Arts'
 				personal
 				list={arts}
-				//  onAddArts={addArts}
 			/>
 		</>
 	)

@@ -5,7 +5,6 @@ import theme from '@/styles/theme'
 export const useStyles = makeStyles({
 	stepperContainer: {
 		'& .MuiStepLabel-iconContainer': {
-			// color: theme.palette.primary.dark,
 			backgroundColor: theme.palette.primary.dark,
 			width: '26px',
 			height: '26px',

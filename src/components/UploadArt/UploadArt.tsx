@@ -4,18 +4,10 @@ import Button from '@mui/material/Button'
 
 import { loggerWarn } from '@/helpers/logger'
 
-// import { useAuth } from '@/hooks/useAuth'
-// import { Art } from '@/types/Art'
 import UploadArtModal from '../UploadArtModal/UploadArtModal'
 
-// interface UploadArtProps {
-// 	onAddArts: (art: Art) => void
-// }
-
 const UploadArt = () =>
-// { onAddArts }: UploadArtProps
 {
-	// const { user } = useAuth()
 	const [open, setOpen] = useState(false)
 
 	const handleUploadArt = async (file: File, name: string, description: string) => {

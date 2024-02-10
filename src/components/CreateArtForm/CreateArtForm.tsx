@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormikProps } from 'formik'
 
+import { dataURItoBlob } from '@/helpers/common'
 import { createCategory, createHashTag, getCategories, getHashTags } from '@/helpers/database'
 import { CustomFormikValues } from '@/pages/CreateArt/CreateArt'
 import { Option } from '@/types/Common'
@@ -35,8 +36,8 @@ const CreateArtForm = ({
 	const isLastStep = activeStep === lastStep
 	const initialSliderValue = 100
 
-	const [file, setFile] = useState<File | undefined>(undefined)
-	const [fileSrc, setFileSrc] = useState<string | undefined>(undefined)
+	const [file, setFile] = useState<File | null>(null)
+	const [fileSrc, setFileSrc] = useState<string | null>(null)
 
 	const displayLabelConditionally = (condition: number) =>
 		condition !== initialSliderValue ? 'on' : 'off'
@@ -72,18 +73,7 @@ const CreateArtForm = ({
 		formHandler.setFieldValue('cropped', false)
 	}
 
-	const dataURItoBlob = (dataURI: string, filetype: string) => {
-		const byteString = atob(dataURI.split(',')[1])
-
-		const ab = new ArrayBuffer(byteString.length)
-		const ia = new Uint8Array(ab)
-
-		for (let i = 0; i < byteString.length; i++) {
-			ia[i] = byteString.charCodeAt(i)
-		}
-
-		return new Blob([ab], { type: filetype }) // Adjust the type accordingly
-	}
+	
 
 	const handleCropImage = async (src: string, filename: string, filetype: string) => {
 		const croppedBlob = dataURItoBlob(src, filetype)

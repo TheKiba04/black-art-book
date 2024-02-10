@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography'
 import { map } from 'lodash'
 
 import ArtCard from '@/components/ArtCard/ArtCard'
-// import UploadArt from '@/components/UploadArt/UploadArt'
 import { useAuth } from '@/hooks/useAuth'
 import { Art } from '@/types/Art'
 
@@ -15,10 +14,8 @@ interface ListOfArtsProps {
 	title: string
 	list: Art[] | []
 	personal?: boolean
-	// onAddArts: (art: Art) => void
 }
 const ListOfArts = ({ title, list, personal,
-	//  onAddArts
 	 }: ListOfArtsProps) => {
 	const { user } = useAuth()
 	const [selectedArt, setSelectedArt] = useState<Art | null>(null)

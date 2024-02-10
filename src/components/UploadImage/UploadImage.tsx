@@ -13,7 +13,7 @@ import 'cropperjs/dist/cropper.css'
 
 import { useStyles } from './/UploadImage.styles'
 interface UploadImageProps {
-	fileSrc: string | undefined
+	fileSrc: string | null
 	onUpload: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
 	onCrop: (src: string, filename: string, filetype: string) => void
 	style?: React.CSSProperties
@@ -26,24 +26,8 @@ const UploadImage = ({ fileSrc, onUpload, onCrop, style, className }: UploadImag
 	const [startCrop, setStartCrop] = useState(false)
 	const [image, setImage] = useState<string | undefined>(undefined)
 	const [localFile, setLocalFile] = useState<File | undefined>(undefined)
-	// const [cropData, setCropData] = useState('#')
 	const cropperRef = createRef<ReactCropperElement>()
-	// const onChange = (e: any) => {
-	// 	e.preventDefault()
-	// 	let files
 
-	// 	if (e.dataTransfer) {
-	// 		files = e.dataTransfer.files
-	// 	} else if (e.target) {
-	// 		files = e.target.files
-	// 	}
-	// 	const reader = new FileReader()
-
-	// 	reader.onload = () => {
-	// 		setImage(reader.result as any)
-	// 	}
-	// 	reader.readAsDataURL(files[0])
-	// }
 
 	const handleStartCrop = () => {
 		setStartCrop(true)
@@ -54,14 +38,17 @@ const UploadImage = ({ fileSrc, onUpload, onCrop, style, className }: UploadImag
 	}
 
 	const getCropData = () => {
-		if (typeof cropperRef.current?.cropper !== 'undefined') {
-			const croppedImageURL = cropperRef.current?.cropper.getCroppedCanvas().toDataURL()
 
+		if (typeof cropperRef.current?.cropper !== 'undefined') {
+
+			const croppedImageURL = cropperRef.current?.cropper.getCroppedCanvas().toDataURL()
+				
 			setImage(croppedImageURL)
 			localFile && onCrop(croppedImageURL, localFile.name, localFile.type)
 			handleFinishCrop()
 		}
 	}
+	
 
 	const handleUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const inputElement = event.target as HTMLInputElement

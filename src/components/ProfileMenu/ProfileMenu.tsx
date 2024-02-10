@@ -39,17 +39,12 @@ const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => 
 			color: (theme: Theme) => theme.palette.secondary.dark,
 		},
 		children: `${name.split(' ')[0][0]}`,
-		// children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
 	})
 
 	return (
 		<>
 			<IconButton onClick={handleOpen}>
 				<Avatar {...stringAvatar(user.fullname)} alt={user.fullname} src={user.avatarURL} />
-				{/* <Typography variant='body1' color='secondary.dark'>
-						{getInitials(user.fullname)}
-					</Typography> */}
-				{/* </Avatar> */}
 			</IconButton>
 			<Menu
 				anchorEl={anchorEl}
@@ -60,7 +55,6 @@ const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => 
 				}}
 			>
 				<MenuItem onClick={navigateToProfile}>Profile</MenuItem>
-				{/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
 				<MenuItem onClick={handleSignout}>Logout</MenuItem>
 			</Menu>
 		</>

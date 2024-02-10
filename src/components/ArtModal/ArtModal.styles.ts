@@ -9,23 +9,9 @@ export const useStyles = makeStyles({
 			flexDirection: 'column',
 			alignItems: 'center',
 			justifyContent: 'center',
-			// width: '100%',
 			maxWidth: '1000px',
-			// maxHeight: '900px!important',
-			// minWidth: '900px',
 		},
 	},
-	// artModalUploadContainer: {
-	// 	margin: '0 20px 20px 0',
-	// 	width: '300px',
-	// 	maxWidth: '300px',
-	// 	maxHeight: '300px',
-	// 	padding: 0,
-	// 	'& img': {
-	// 		maxWidth: '300px',
-	// 		maxHeight: '300px',
-	// 	},
-	// },
 	artModalCloseButton: {
 		width: '40px',
 		height: '40px',
@@ -41,25 +27,6 @@ export const useStyles = makeStyles({
 		maxWidth: 'inherit',
 
 		width: '100%',
-		// height: '100%',
-
-		// [theme.breakpoints.up('xl')]: {
-		// 	maxWidth: '1300px',
-		// 	// maxHeight: '800px',
-		// },
-		// [theme.breakpoints.down('xl')]: {
-		// 	maxWidth: '1100px',
-		// 	// maxHeight: '500px',
-		// },
-		// [theme.breakpoints.down('lg')]: {
-		// 	maxWidth: '800px',
-		// },
-		// [theme.breakpoints.down('md')]: {
-		// 	maxWidth: '500px',
-		// },
-		// [theme.breakpoints.down('sm')]: {
-		// 	maxWidth: '300px',
-		// },
 	},
 	artModalTitle: {
 		display: 'flex',

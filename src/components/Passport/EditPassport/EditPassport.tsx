@@ -5,11 +5,12 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 
 import UploadImage from '@/components/UploadImage/UploadImage'
+import { dataURItoBlob } from '@/helpers/common'
 import { updateUser, updateUserWithAvatar } from '@/helpers/database'
 import { loggerErr } from '@/helpers/logger'
 import { User } from '@/types/User'
 
-const EditPassword = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
+const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	const [file, setFile] = useState<File | null>(null)
 	const [fileSrc, setFileSrc] = useState<string | null>(user.avatarURL)
 
@@ -38,6 +39,15 @@ const EditPassword = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	const handleChangeDescr = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUserDescription(event.target.value)
 	}
+
+	
+	const handleCropImage = async (src: string, filename: string, filetype: string) => {
+		const croppedBlob = dataURItoBlob(src, filetype)
+		const file = new File([croppedBlob], filename, { type: filetype }) // Specify the desired file name and type
+
+		setFile(file)
+	}
+
 	const onSubmit = async (userFullname: string, userDescription: string, file: File | null) => {
 		const updatedProfileWithAvatar = {
 			avatarFile: file,
@@ -77,7 +87,7 @@ const EditPassword = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	return (
 		<Grid container spacing={4} pt={3}>
 			<Grid item xs={4} textAlign='center'>
-				<UploadImage fileSrc={fileSrc} onUpload={handleUploadImage} />
+				<UploadImage fileSrc={fileSrc} onUpload={handleUploadImage} onCrop={handleCropImage} />
 			</Grid>
 			<Grid container item xs={6}>
 				<Grid item>
@@ -122,4 +132,4 @@ const EditPassword = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	)
 }
 
-export default EditPassword
+export default EditPassport
