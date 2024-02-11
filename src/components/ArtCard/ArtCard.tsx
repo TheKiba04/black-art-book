@@ -72,7 +72,10 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 		<Grid item>
 			<Card className={styles.recentArtsCard} onClick={handleClick}>
 				<div>
-					<CardMedia className={styles.recentArtsImage} sx={{ height: 320 }} image={art.artURL} />
+					<CardMedia className={styles.recentArtsImage} sx={{ 
+						height: 320,
+						filter: `brightness(${art.customized.brightness}%) contrast(${art.customized.contrast}%)`,
+					}} image={art.artURL} />
 					<CardContent className={styles.recentArtsCardContent}>
 						<Typography gutterBottom variant='h6' fontWeight='bold' component='div'>
 							{art.name}

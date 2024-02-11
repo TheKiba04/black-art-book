@@ -3,9 +3,7 @@ import { makeStyles } from '@mui/styles'
 import theme from '@/styles/theme'
 
 export const useStyles = makeStyles({
-	recentArtsImage: {
-		filter: 'grayscale(1)',
-	},
+	recentArtsImage: {},
 	recentArtsButton: {
 		color: theme.palette.secondary.main,
 	},

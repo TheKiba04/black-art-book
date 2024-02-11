@@ -28,7 +28,7 @@ const ListOfArts = ({ title, list, personal,
 		setSelectedArt(null)
 	}
 
-	const renderArtModal = () => selectedArt && <ArtModal onClose={handleClose} art={selectedArt} />
+	const renderArtModal = () => selectedArt && <ArtModal user={user} onClose={handleClose} art={selectedArt} />
 
 	return (
 		<>

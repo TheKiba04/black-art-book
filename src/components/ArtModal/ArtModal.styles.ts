@@ -36,6 +36,18 @@ export const useStyles = makeStyles({
 		fontSize: '2rem',
 		lineHeight: '2.5rem',
 	},
+	artModalButton: {
+		color: theme.palette.secondary.main,
+	},
+	badge: {
+		'& .MuiBadge-badge': {
+			right: -3,
+			top: 1,
+			border: `2px solid ${theme.palette.background.paper}`,
+			padding: '0 2px',
+			fontSize: '0.6rem',
+		},
+	},
 	artModalContent: {
 		width: '100%',
 	},
