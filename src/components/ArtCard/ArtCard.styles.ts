@@ -12,8 +12,8 @@ export const useStyles = makeStyles({
 	recentArtsCard: {
 		width: 345,
 		maxWidth: 345,
-		height: 460,
-		maxHeight: 460,
+		height: 500,
+		maxHeight: 500,
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'space-between',
@@ -21,7 +21,15 @@ export const useStyles = makeStyles({
 		cursor: 'pointer',
 	},
 	recentArtsCardContent: {
+		paddingTop: '0 !important',
 		paddingBottom: '0 !important',
+	},
+	recentArtsDescription: {
+		overflow: 'hidden',
+   		display: '-webkit-box',
+  		'webkit-line-clamp': 4, 
+    	lineClamp: 4, 
+   		'-webkit-box-orient': 'vertical',
 	},
 	recentArtsCardActions: {
 		padding: '0 16px 0',

@@ -10,8 +10,7 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
-import { trimString } from '@/helpers/common'
-import { getComments, removeLike, setLike } from '@/helpers/database'
+import { getComments, getUser, removeLike, setLike } from '@/helpers/database'
 import { Art } from '@/types/Art'
 import { User } from '@/types/User'
 
@@ -29,12 +28,12 @@ interface ArtCardProps {
 }
 
 const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
-	const BADGE_INVISIBILITY_LIMIT = 1
+	const BADGE_INVISIBILITY_LIMIT = 0
 	const BADGE_BASIC_COUNT = 0
+	const [userName,setUserName] = useState<string>('')
 	const [likes, setLikes] = useState<string[]>(art.likes)
 	const [commentsCount, setCommentsCount] = useState<number>(BADGE_BASIC_COUNT)
 	const styles = useStyles()
-	const allowedSymbols = 80
 
 	const handleClick = () => {
 		onClick(art)
@@ -66,6 +65,7 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 
 	useEffect(() => {
 		getComments(art.comments).then((comments) => setCommentsCount(comments.length))
+		getUser(art.createdBy).then((user) => setUserName(user?.fullname || ''))
 	}, [art])
 
 	return (
@@ -77,8 +77,8 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 						<Typography gutterBottom variant='h6' fontWeight='bold' component='div'>
 							{art.name}
 						</Typography>
-						<Typography variant='body1' color='text.secondary'>
-							{trimString(art.description, allowedSymbols)}
+						<Typography className={styles.recentArtsDescription} variant='body1' color='text.secondary'>
+							{art.description}
 						</Typography>
 					</CardContent>
 				</div>
@@ -90,7 +90,7 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 				>
 					{!isPersonal && (
 						<Typography variant='caption' color='text.secondary'>
-							Author: {art.createdBy}
+							Author: {userName}
 						</Typography>
 					)}
 					<Box>

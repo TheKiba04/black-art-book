@@ -237,7 +237,7 @@ export const getHashTags = async () => {
 
 // PUT REQUESTS
 // User
-export const updateUser = async (userId: string, data: Record<string, string>) => {
+export const updateUser = async (userId: string, data: Record<string, string|undefined>) => {
 	const userRef = doc(database, 'users', userId)
 
 	auth.currentUser &&
@@ -249,7 +249,7 @@ export const updateUser = async (userId: string, data: Record<string, string>) =
 
 export const updateUserWithAvatar = async (
 	userId: string,
-	data: Record<string, string | File | null>
+	data: Record<string, string | File | null| undefined>
 ) => {
 	try {
 		const updatedAvatarURL = await uploadImage(userId, data.avatarFile as File)

@@ -24,9 +24,7 @@ export const useStyles = makeStyles({
 	},
 	artModalImage: {
 		maxHeight: '800px',
-		maxWidth: 'inherit',
-
-		width: '100%',
+		maxWidth: '80%',
 	},
 	artModalTitle: {
 		display: 'flex',

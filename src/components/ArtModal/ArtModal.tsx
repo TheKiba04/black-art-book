@@ -33,7 +33,7 @@ const ArtModal = ({ onClose, art }: ArtModalProps) => {
 			</DialogTitle>
 			<DialogContent className={styles.artModalContent}>
 				<Grid container spacing={3} pt={1} justifyContent='center'>
-					<Grid item textAlign='center'>
+					<Grid item xs={12} textAlign='center'>
 						<img src={art.artURL} className={styles.artModalImage} alt={art.name} />
 					</Grid>
 					<Grid item xs={10}>

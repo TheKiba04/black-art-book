@@ -18,7 +18,7 @@ const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	const [userDescription, setUserDescription] = useState<string | undefined>(user.description)
 	const [formError, setFormError] = useState<boolean>(false)
 
-	const isError = !userFullname || !userDescription
+	const isError = !userFullname
 
 	const isValidField = (field: string | undefined) => formError && field === ''
 	const isValidFieldWithMessage = (field: string | undefined, message: string) =>
@@ -48,7 +48,7 @@ const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 		setFile(file)
 	}
 
-	const onSubmit = async (userFullname: string, userDescription: string, file: File | null) => {
+	const onSubmit = async (userFullname: string, userDescription?: string, file?: File | null) => {
 		const updatedProfileWithAvatar = {
 			avatarFile: file,
 			fullname: userFullname,

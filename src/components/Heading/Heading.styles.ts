@@ -5,12 +5,12 @@ import theme from '@/styles/theme'
 
 export const useStyles = makeStyles({
 	headingContainer: {
-		padding: '10rem 0 0',
+		padding: '3rem 0 0',
 		overflow: 'hidden',
 	},
 	headingSubtitle: {
-		paddingTop: '5rem!important',
-		paddingBottom: '2rem!important',
+		paddingTop: '2rem!important',
+		paddingBottom: '.5rem!important',
 	},
 	headingButton: {
 		backgroundColor: theme.palette.primary.dark,
@@ -19,7 +19,7 @@ export const useStyles = makeStyles({
 		outline: `2px solid ${theme.palette.primary.dark}`,
 		borderRadius: '2px',
 		padding: '0.3em 1em',
-		marginBottom: '2rem',
+		marginBottom: '.1rem',
 		'&:hover': {
 			backgroundColor: theme.palette.primary.main,
 			color: theme.palette.primary.dark,
