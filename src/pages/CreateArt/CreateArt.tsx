@@ -1,17 +1,17 @@
 import { useState } from 'react'
+
+import checklist from '../../../checklist.json'
+import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
 import Grid from '@mui/material/Grid'
-import { useFormik } from 'formik'
 
 import Checklist from '@/components/Checklist/Checklist'
 import CreateArtForm from '@/components/CreateArtForm/CreateArtForm'
 import { merger } from '@/helpers/common'
 import { createArt } from '@/helpers/database'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useUser'
 import { Option } from '@/types/Common'
-
-import checklist from '../../../checklist.json'
 
 export interface CustomFormikValues {
 	artName: string

@@ -41,7 +41,7 @@
 			{ "blankLine": "always", "prev": ["const", "let"], "next": "*" },
 			{ "blankLine": "any", "prev": ["const", "let"], "next": ["const", "let"] },
 			{ "blankLine": "always", "prev": ["case", "default"], "next": "*" },
-			{ "blankLine": "always", "prev": "*", "next": ["export", "const"] }
+			{ "blankLine": "always", "prev": "*", "next": "export" }
 		],
 		"no-ex-assign": "error",
 		"no-fallthrough": ["error", { "commentPattern": "break[\\s\\w]*omitted" }],
@@ -52,6 +52,7 @@
 			{
 				"groups": [
 					["^react"],
+					["^(?!@|.\\/).*"],
 					["^@?\\w"],
 					["@/(.*)"],
 					["@components/*"],

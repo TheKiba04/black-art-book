@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 
 import Button from '@mui/material/Button'
@@ -6,7 +7,7 @@ import Grid from '@mui/material/Grid'
 import Popover from '@mui/material/Popover'
 import Typography from '@mui/material/Typography'
 
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useUser'
 
 import { useStyles } from './Heading.styles'
 
@@ -33,7 +34,7 @@ const Heading = () => {
 
 	const navigateToLogin = () => {
 		handleClose()
-		navigate('/signin')
+		navigate('/auth/signin')
 	}
 
 	const navigateToCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -116,7 +117,8 @@ const Heading = () => {
 						</Grid>
 						<Grid item xs={9}>
 							<Typography sx={{ px: 2 }}>
-								`Its hard to create something that matter without being known to your loyal Followers!`
+								`Its hard to create something that matter without being known to your loyal
+								Followers!`
 							</Typography>
 						</Grid>
 						<Grid item xs={3} textAlign='center'>

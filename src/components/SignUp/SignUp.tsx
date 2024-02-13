@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
 import Avatar from '@mui/material/Avatar'
@@ -11,62 +11,74 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import { signup } from '@/helpers/auth'
+import { AuthSignUpFormikValues } from '@/types/Auth'
 
 import Copyright from '@components/Copyright/Copyright'
 
 import LockIcon from '@mui/icons-material/Lock'
 
-export const SignUp = () => {
+import { useStyles } from './SignUp.styles'
+
+const SignUp = () => {
+	const styles = useStyles()
+
 	const navigate = useNavigate()
 
-	const navigateToSignIn = () => navigate('/signin')
+	const navigateSignIn = () => navigate('/auth/signin')
 
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault()
-
-		const data = new FormData(event.currentTarget)
-
-		const registeredUser = await signup({
-			email: data.get('email') as string,
-			password: data.get('password') as string,
-			firstName: data.get('firstName') as string,
-			lastName: data.get('lastName') as string,
-		})
-
-		registeredUser && navigateToSignIn()
+	const initialSignUpFormValues = {
+		email: '',
+		password: '',
+		firstName: '',
+		lastName: '',
 	}
 
+	const handleSubmit = async (data: AuthSignUpFormikValues) => {
+		const registeredUser = await signup(data)
+
+		registeredUser && navigateSignIn()
+	}
+
+	const formik = useFormik<AuthSignUpFormikValues>({
+		initialValues: initialSignUpFormValues,
+		onSubmit: handleSubmit,
+	})
+
 	return (
-		<Container component='main' maxWidth='xs'>
-			<Box
-				sx={{
-					marginTop: 8,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-				}}
-			>
-				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+		<Container component='main' maxWidth='xs' className={styles.signUpContainer}>
+			<Box className={styles.signUpWrapper}>
+				<Avatar className={styles.signUpWrapperIcon}>
 					<LockIcon />
 				</Avatar>
 				<Typography component='h1' variant='h5'>
 					Sign up
 				</Typography>
-				<Box component='form' noValidate={false} onSubmit={handleSubmit} sx={{ mt: 3 }}>
+				<Box
+					component='form'
+					noValidate={false}
+					onSubmit={formik.handleSubmit}
+					className={styles.form}
+				>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								autoComplete='given-name'
+								value={formik.values.firstName}
+								onChange={formik.handleChange}
+								size='small'
 								name='firstName'
 								required
 								fullWidth
 								id='firstName'
 								label='First Name'
 								autoFocus
+								autoComplete='given-name'
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
+								value={formik.values.lastName}
+								onChange={formik.handleChange}
+								size='small'
 								required
 								fullWidth
 								id='lastName'
@@ -77,6 +89,9 @@ export const SignUp = () => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
+								value={formik.values.email}
+								onChange={formik.handleChange}
+								size='small'
 								required
 								fullWidth
 								id='email'
@@ -87,6 +102,9 @@ export const SignUp = () => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
+								value={formik.values.password}
+								onChange={formik.handleChange}
+								size='small'
 								required
 								fullWidth
 								name='password'
@@ -97,10 +115,10 @@ export const SignUp = () => {
 							/>
 						</Grid>
 					</Grid>
-					<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+					<Button type='submit' fullWidth variant='contained' className={styles.submit}>
 						Sign Up
 					</Button>
-					<Grid container justifyContent='flex-end'>
+					<Grid container className={styles.linkContainer}>
 						<Grid item>
 							<Link href='/signin' variant='body1'>
 								Already have an account? Sign in
@@ -113,3 +131,5 @@ export const SignUp = () => {
 		</Container>
 	)
 }
+
+export default SignUp

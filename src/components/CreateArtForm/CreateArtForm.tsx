@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react'
+
+import Stepper from '../Stepper/Stepper'
+import UploadImage from '../UploadImage/UploadImage'
+import { FormikProps } from 'formik'
 import { MultiValue } from 'react-select'
 import AsyncCreatableSelect from 'react-select/async-creatable'
 
@@ -7,15 +11,12 @@ import Grid from '@mui/material/Grid'
 import Slider from '@mui/material/Slider'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { FormikProps } from 'formik'
 
 import { dataURItoBlob } from '@/helpers/common'
 import { createCategory, createHashTag, getCategories, getHashTags } from '@/helpers/database'
 import { CustomFormikValues } from '@/pages/CreateArt/CreateArt'
 import { Option } from '@/types/Common'
 
-import Stepper from '../Stepper/Stepper'
-import UploadImage from '../UploadImage/UploadImage'
 import { useStyles } from './CreateArtForm.styles'
 
 const CreateArtForm = ({
@@ -81,7 +82,7 @@ const CreateArtForm = ({
 		formHandler.setFieldValue('file', inputElement.files[0])
 		formHandler.setFieldValue('cropped', false)
 	}
-	
+
 	const handleCropImage = async (src: string, filename: string, filetype: string) => {
 		const croppedBlob = dataURItoBlob(src, filetype)
 

@@ -1,10 +1,12 @@
-import Layout from '@/components/Layout/Layout'
-import { ProtectedRoute } from '@/components/ProtectedRoute/ProtectedRoute'
-import { SignIn } from '@/components/SignIn/SignIn'
-import { SignUp } from '@/components/SignUp/SignUp'
+import Layout from '@/containers/Layout/Layout'
+import { ProtectedRoute } from '@/containers/ProtectedRoute/ProtectedRoute'
+import Auth from '@/pages/Auth/Auth'
 import CreateArt from '@/pages/CreateArt/CreateArt'
 import Home from '@/pages/Home/Home'
 import Profile from '@/pages/Profile/Profile'
+
+import SignIn from '@components/SignIn/SignIn'
+import SignUp from '@components/SignUp/SignUp'
 
 export const routes = [
 	{
@@ -34,11 +36,17 @@ export const routes = [
 		],
 	},
 	{
-		path: '/signin',
-		element: <SignIn />,
-	},
-	{
-		path: '/signup',
-		element: <SignUp />,
+		path: 'auth',
+		element: <Auth />,
+		children: [
+			{
+				path: 'signin',
+				element: <SignIn />,
+			},
+			{
+				path: 'signup',
+				element: <SignUp />,
+			},
+		],
 	},
 ]

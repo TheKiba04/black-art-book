@@ -1,19 +1,24 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
+import { onAuthStateChanged } from 'firebase/auth'
+
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
-import { onAuthStateChanged } from 'firebase/auth'
 
 import { auth } from '@/config/firebase'
 import { getUser } from '@/helpers/database'
 import { User } from '@/types/User'
 
-export const AuthContext = createContext(
+import { useStyles } from './UserProvider.styles'
+
+export const UserContext = createContext(
 	null as unknown as { user: User | null; setUser: (user: User) => void }
 )
 
-const AuthProvider = ({ children }: { children: ReactNode }) => {
+const UserProvider = ({ children }: { children: ReactNode }) => {
+	const styles = useStyles()
+
 	const [currentUser, setCurrentUser] = useState<User>(null as unknown as User)
 
 	const [loading, setLoading] = useState(true)
@@ -39,25 +44,17 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 	)
 
 	return (
-		<AuthContext.Provider value={value}>
+		<UserContext.Provider value={value}>
 			{loading ? (
-				<Box
-					sx={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						width: '100%',
-						height: '100%',
-					}}
-				>
+				<Box className={styles.loadingContainer}>
 					<Typography variant='inherit'>Loading...</Typography>
 					<CircularProgress size={20} />
 				</Box>
 			) : (
 				children
 			)}
-		</AuthContext.Provider>
+		</UserContext.Provider>
 	)
 }
 
-export default AuthProvider
+export default UserProvider

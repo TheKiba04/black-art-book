@@ -1,14 +1,14 @@
 import { useState } from 'react'
 
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import ArtModal from '../ArtModal/ArtModal'
 import { map } from 'lodash'
 
-import ArtCard from '@/components/ArtCard/ArtCard'
-import { useAuth } from '@/hooks/useAuth'
-import { Art } from '@/types/Art'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
-import ArtModal from '../ArtModal/ArtModal'
+import ArtCard from '@/components/ArtCard/ArtCard'
+import { useAuth } from '@/hooks/useUser'
+import { Art } from '@/types/Art'
 
 interface ListOfArtsProps {
 	title: string
@@ -16,8 +16,7 @@ interface ListOfArtsProps {
 	personal?: boolean
 }
 
-const ListOfArts = ({ title, list, personal,
-	 }: ListOfArtsProps) => {
+const ListOfArts = ({ title, list, personal }: ListOfArtsProps) => {
 	const { user } = useAuth()
 
 	const [selectedArt, setSelectedArt] = useState<Art | null>(null)
@@ -30,7 +29,8 @@ const ListOfArts = ({ title, list, personal,
 		setSelectedArt(null)
 	}
 
-	const renderArtModal = () => selectedArt && <ArtModal user={user} onClose={handleClose} art={selectedArt} />
+	const renderArtModal = () =>
+		selectedArt && <ArtModal user={user} onClose={handleClose} art={selectedArt} />
 
 	return (
 		<>

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
+import UploadArtModal from '../UploadArtModal/UploadArtModal'
+
 import Button from '@mui/material/Button'
 
 import { loggerWarn } from '@/helpers/logger'
-
-import UploadArtModal from '../UploadArtModal/UploadArtModal'
 
 const UploadArt = () =>
 {

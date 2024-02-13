@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 
+import moment from 'moment'
+
 import Avatar from '@mui/material/Avatar'
 import Badge from '@mui/material/Badge'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import moment from 'moment'
 
 import { getInitials } from '@/helpers/common'
 import { getUser, removeCommentLike, setCommentLike } from '@/helpers/database'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useUser'
 import { Comment } from '@/types/Comment'
 import { User } from '@/types/User'
 

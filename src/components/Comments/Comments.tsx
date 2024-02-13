@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import CommentInput from '../CommentInput/CommentInput'
 import { isEmpty } from 'lodash'
 import moment from 'moment'
 
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+
 import CommentItem from '@/components/CommentItem/CommentItem'
 import { createComment, getComments } from '@/helpers/database'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useUser'
 import { Art } from '@/types/Art'
 import { Comment } from '@/types/Comment'
-
-import CommentInput from '../CommentInput/CommentInput'
 
 interface CommentsProps {
 	currentArt: Art

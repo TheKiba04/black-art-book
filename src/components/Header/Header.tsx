@@ -8,14 +8,14 @@ import Typography from '@mui/material/Typography'
 import Logo from '@/components/Logo/Logo'
 import ProfileMenu from '@/components/ProfileMenu/ProfileMenu'
 import { signout } from '@/helpers/auth'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useUser'
 
 const Header = () => {
 	const { user } = useAuth()
 
 	const navigate = useNavigate()
 
-	const navigateToSignIn = () => navigate('/signin')
+	const navigateToSignIn = () => navigate('/auth/signin')
 
 	const navigateHome = () => navigate('/')
 

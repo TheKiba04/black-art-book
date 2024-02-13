@@ -1,9 +1,10 @@
+import { map } from 'lodash'
+
 import Box from '@mui/material/Box'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import MUIStepper from '@mui/material/Stepper'
 import Typography from '@mui/material/Typography'
-import { map } from 'lodash'
 
 import { useStyles } from './Stepper.styles'
 

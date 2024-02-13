@@ -1,0 +1,1 @@
+export const RESOURCE_NAME = 'BLACK ART BOOK'

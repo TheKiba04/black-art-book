@@ -4,7 +4,7 @@ import BlockDivider from '@/components/BlockDivider/BlockDivider'
 import ListOfArts from '@/components/ListOfArts/ListOfArts'
 import Passport from '@/components/Passport/Passport'
 import { getUserArts } from '@/helpers/database'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useUser'
 import { Art } from '@/types/Art'
 
 const Profile = () => {
@@ -22,11 +22,7 @@ const Profile = () => {
 		<>
 			<Passport />
 			<BlockDivider />
-			<ListOfArts
-				title='My Arts'
-				personal
-				list={arts}
-			/>
+			<ListOfArts title='My Arts' personal list={arts} />
 		</>
 	)
 }

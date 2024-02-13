@@ -1,15 +1,15 @@
 import React, { createRef, useEffect, useState } from 'react'
+
+import 'cropperjs/dist/cropper.css'
+import classNames from 'classnames'
 import Cropper, { ReactCropperElement } from 'react-cropper'
 
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
-import classNames from 'classnames'
 
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import CropIcon from '@mui/icons-material/Crop'
-
-import 'cropperjs/dist/cropper.css'
 
 import { useStyles } from './/UploadImage.styles'
 interface UploadImageProps {

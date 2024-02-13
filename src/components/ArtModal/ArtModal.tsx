@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import Comments from '../Comments/Comments'
+
 import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
@@ -18,7 +20,6 @@ import CloseIcon from '@mui/icons-material/Close'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
-import Comments from '../Comments/Comments'
 import { useStyles } from './ArtModal.styles'
 interface ArtModalProps {
 	onClose: () => void

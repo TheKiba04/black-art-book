@@ -1,12 +1,12 @@
+import './App.css'
+
 import CssBaseline from '@mui/material/CssBaseline'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 
-import Router from '@/components/Router/Router'
+import Router from '@/containers/Router/Router'
 import theme from '@/styles/theme'
 
-import './App.css'
-
-import AuthProvider from './components/AuthProvider/AuthProvider'
+import AuthProvider from './containers/UserProvider/UserProvider'
 
 const App = () => {
 	const allowedWidth = 800

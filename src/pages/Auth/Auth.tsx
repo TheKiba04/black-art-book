@@ -1,5 +1,5 @@
-import { SignIn } from '@/components/SignIn/SignIn'
+import { Outlet } from 'react-router-dom'
 
-const Auth = () => <SignIn />
+const Auth = () => <Outlet  />
 
 export default Auth
