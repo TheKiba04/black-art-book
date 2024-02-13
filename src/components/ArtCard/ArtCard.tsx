@@ -29,15 +29,21 @@ interface ArtCardProps {
 
 const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 	const BADGE_INVISIBILITY_LIMIT = 0
+
 	const BADGE_BASIC_COUNT = 0
+
 	const [userName,setUserName] = useState<string>('')
+
 	const [likes, setLikes] = useState<string[]>(art.likes)
+
 	const [commentsCount, setCommentsCount] = useState<number>(BADGE_BASIC_COUNT)
+
 	const styles = useStyles()
 
 	const handleClick = () => {
 		onClick(art)
 	}
+
 	const renderLikeIcon = (likes: string[]) =>
 		user && likes.includes(user.uid) ? <FavoriteIcon /> : <FavoriteBorderIcon />
 
@@ -54,6 +60,7 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 	const handleClickLike =
 		(likes: string[]) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			event.stopPropagation()
+
 			const id = event.currentTarget.id
 
 			if (user) {

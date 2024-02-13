@@ -3,6 +3,9 @@ import { makeStyles } from '@mui/styles'
 import theme from '@/styles/theme'
 
 export const useStyles = makeStyles({
+	stepperWrapper: {
+		width: '100%',
+	},
 	stepperContainer: {
 		'& .MuiStepLabel-iconContainer': {
 			backgroundColor: theme.palette.primary.dark,

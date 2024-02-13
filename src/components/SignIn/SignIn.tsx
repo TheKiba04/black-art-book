@@ -29,10 +29,12 @@ const Copyright = () => (
 
 export const SignIn = () => {
 	const navigate = useNavigate()
+
 	const navigateToHome = () => navigate('/')
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
+
 		const data = new FormData(event.currentTarget)
 
 		const signedUser = await signin({

@@ -12,25 +12,18 @@ import Typography from '@mui/material/Typography'
 
 import { signup } from '@/helpers/auth'
 
-import LockIcon from '@mui/icons-material/Lock'
+import Copyright from '@components/Copyright/Copyright'
 
-const Copyright = () => (
-	<Typography variant='body1' color='text.secondary' align='center' sx={{ mt: 5 }}>
-		{'Copyright © '}
-		<Link color='inherit' href='/'>
-			Your Website
-		</Link>{' '}
-		{new Date().getFullYear()}
-		{'.'}
-	</Typography>
-)
+import LockIcon from '@mui/icons-material/Lock'
 
 export const SignUp = () => {
 	const navigate = useNavigate()
+
 	const navigateToSignIn = () => navigate('/signin')
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
+
 		const data = new FormData(event.currentTarget)
 
 		const registeredUser = await signup({

@@ -11,7 +11,9 @@ import { User } from '@/types/User'
 
 const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => {
 	const navigate = useNavigate()
+
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
 	const open = Boolean(anchorEl)
 
 	const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {

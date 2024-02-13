@@ -29,6 +29,7 @@ import { uploadImage } from './storage'
 export const createUser = async (userId: string, data: object) => {
 	await setDoc(doc(database, 'users', userId), data)
 }
+
 // Art
 export const createArt = async (userId: string, data: CustomFormikValues) => {
 	try {
@@ -56,6 +57,7 @@ export const createArt = async (userId: string, data: CustomFormikValues) => {
 		await updateDoc(doc(database, 'users', userId), {
 			artList: arrayUnion(artRef.id),
 		})
+
 		const art = await getDoc(doc(database, 'arts', artRef.id))
 
 		return art?.data()
@@ -80,7 +82,9 @@ export const createComment = async (data: Comment) => {
 		})
 
 		const newCommentRef = doc(database, 'comments', commentsRef.id)
+
 		const commentSnapshot = await getDoc(newCommentRef)
+
 		const commentData = commentSnapshot?.data() ?? null
 
 		return commentData as Comment
@@ -118,6 +122,7 @@ export const createHashTag = async (tag: string) => {
 export const getUser = async (userId: string) => {
 	try {
 		const docRef = doc(database, 'users', userId)
+
 		const docSnapshot = await getDoc(docRef)
 
 		return (docSnapshot?.data() as User) ?? null
@@ -132,8 +137,11 @@ export const getUser = async (userId: string) => {
 export const getAllArts = async () => {
 	try {
 		const itemsLimit = 9
+
 		const q = query(collection(database, 'arts'), limit(itemsLimit))
+
 		const querySnapshot = await getDocs(q)
+
 		const allArts = querySnapshot.docs.map((doc) => doc.data()) as Art[]
 
 		return allArts
@@ -148,14 +156,18 @@ export const getAllArts = async () => {
 export const getUserArts = async (userId: string) => {
 	try {
 		const docRef = doc(database, 'users', userId)
+
 		const docSnapshot = await getDoc(docRef)
+
 		const artList = docSnapshot?.data()?.artList ?? []
 
 		if (!isEmpty(artList)) {
 			const userArts: Art[] = await Promise.all(
 				artList.map(async (ref: string) => {
 					const artRef = doc(database, 'arts', ref)
+
 					const artSnapshot = await getDoc(artRef)
+
 					const artData = (artSnapshot?.data() as Art) ?? null
 
 					return artData
@@ -181,7 +193,9 @@ export const getComments = async (commentsId: string[]) => {
 			const comments: Comment[] = await Promise.all(
 				commentsId.map(async (ref: string) => {
 					const commentRef = doc(database, 'comments', ref)
+
 					const commentSnapshot = await getDoc(commentRef)
+
 					const commentData = commentSnapshot?.data() ?? null
 
 					return commentData as Comment
@@ -203,7 +217,9 @@ export const getComments = async (commentsId: string[]) => {
 export const getCategories = async () => {
 	try {
 		const q = query(collection(database, 'categories'))
+
 		const querySnapshot = await getDocs(q)
+
 		const categories = querySnapshot.docs.map((doc) => ({
 			label: doc.data().category as string,
 			value: doc.id,
@@ -221,7 +237,9 @@ export const getCategories = async () => {
 export const getHashTags = async () => {
 	try {
 		const q = query(collection(database, 'hashtags'))
+
 		const querySnapshot = await getDocs(q)
+
 		const hashtags = querySnapshot.docs.map((doc) => ({
 			label: doc.data().tag as string,
 			value: doc.id,
@@ -259,6 +277,7 @@ export const updateUserWithAvatar = async (
 				displayName: data.fullname as string,
 				photoURL: updatedAvatarURL,
 			}))
+
 		const userRef = doc(database, 'users', userId)
 
 		await updateDoc(userRef, {
@@ -270,6 +289,7 @@ export const updateUserWithAvatar = async (
 		loggerErr(err)
 	}
 }
+
 // Art
 export const updateArt = async (artId: string, data: object) => {
 	const artRef = doc(database, 'arts', artId)

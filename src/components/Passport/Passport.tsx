@@ -13,11 +13,15 @@ import EditPassport from './EditPassport/EditPassport'
 
 const Passport = () => {
 	const { user } = useAuth()
+
 	const [editMode, setEditMode] = useState<boolean>(false)
+
 	const [currentUser, setCurrentUser] = useState(null as unknown as User)
+
 	const handleStartEditMode = () => {
 		setEditMode(true)
 	}
+
 	const handleEndEditMode = async () => {
 		setEditMode(false)
 		if (user) {

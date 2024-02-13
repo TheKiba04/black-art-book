@@ -12,15 +12,19 @@ import { User } from '@/types/User'
 
 const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	const [file, setFile] = useState<File | null>(null)
+
 	const [fileSrc, setFileSrc] = useState<string | null>(user.avatarURL)
 
 	const [userFullname, setUserFullname] = useState<string>(user.fullname)
+
 	const [userDescription, setUserDescription] = useState<string | undefined>(user.description)
+
 	const [formError, setFormError] = useState<boolean>(false)
 
 	const isError = !userFullname
 
 	const isValidField = (field: string | undefined) => formError && field === ''
+
 	const isValidFieldWithMessage = (field: string | undefined, message: string) =>
 		isValidField(field) ? message : ''
 
@@ -43,6 +47,7 @@ const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	
 	const handleCropImage = async (src: string, filename: string, filetype: string) => {
 		const croppedBlob = dataURItoBlob(src, filetype)
+
 		const file = new File([croppedBlob], filename, { type: filetype }) // Specify the desired file name and type
 
 		setFile(file)
@@ -54,6 +59,7 @@ const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 			fullname: userFullname,
 			description: userDescription,
 		}
+
 		const updatedProfile = { fullname: userFullname, description: userDescription }
 
 		file
@@ -69,6 +75,7 @@ const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 		setUserDescription('')
 		onEdit()
 	}
+
 	const handleConfirm = async () => {
 		if (isError) {
 			setFormError(true)

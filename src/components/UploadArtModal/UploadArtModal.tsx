@@ -27,10 +27,15 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 	const styles = useStyles()
 
 	const uploadRef = useRef(null)
+
 	const [file, setFile] = useState<File | null>(null)
+
 	const [fileSrc, setFileSrc] = useState<string | null>(null)
+
 	const [artName, setArtName] = useState<string>('')
+
 	const [artDescr, setArtDescr] = useState<string>('')
+
 	const [formError, setFormError] = useState<boolean>(false)
 
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
@@ -44,6 +49,7 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 	}
 
 	const openPopover = Boolean(anchorEl)
+
 	const id = open ? 'simple-popover' : undefined
 
 	const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +67,7 @@ const UploadArtModal = ({ open, onClose, onSubmit, title, contentText }: UploadA
 		onClose()
 		handlePopoverClose()
 	}
+
 	const handleUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const inputElement = event.target as HTMLInputElement
 

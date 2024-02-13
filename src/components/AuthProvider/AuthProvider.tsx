@@ -15,6 +15,7 @@ export const AuthContext = createContext(
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [currentUser, setCurrentUser] = useState<User>(null as unknown as User)
+
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {

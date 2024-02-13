@@ -36,6 +36,7 @@ export const signup = async ({ email, password, firstName, lastName }: IUser) =>
 		})
 		.catch((error) => {
 			const errorCode = error.code
+
 			const errorMessage = error.message
 
 			console.error(errorCode, errorMessage)
@@ -45,6 +46,7 @@ export const signin = async ({ email, password }: IUser) =>
 	await signInWithEmailAndPassword(auth, email, password)
 		.catch((error) => {
 			const errorCode = error.code
+
 			const errorMessage = error.message
 
 			console.error(errorCode, errorMessage)

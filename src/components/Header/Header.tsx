@@ -12,10 +12,13 @@ import { useAuth } from '@/hooks/useAuth'
 
 const Header = () => {
 	const { user } = useAuth()
+
 	const navigate = useNavigate()
 
 	const navigateToSignIn = () => navigate('/signin')
+
 	const navigateHome = () => navigate('/')
+
 	const logout = () => {
 		signout()
 		navigateHome()

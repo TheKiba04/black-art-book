@@ -7,6 +7,7 @@ export const getImage = async (userId: string, fileName: string) => {
 
 	return await getDownloadURL(imagesRef)
 }
+
 export const uploadImage = async (userId: string, file: File) => {
 	const imagesRef = ref(storage, `${userId}/${file.name}`)
 

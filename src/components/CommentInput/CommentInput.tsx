@@ -11,10 +11,13 @@ interface CommentInputProps {
 
 const CommentInput = ({ onAddComment }: CommentInputProps) => {
 	const styles = useStyles()
+
 	const [comment, setComment] = useState<string>('')
+
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setComment(event.target.value)
 	}
+
 	const handleSend = () => {
 		if (comment) {
 			onAddComment(comment)

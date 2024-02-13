@@ -25,9 +25,11 @@ export interface CustomFormikValues {
 
 const CreateArt = () => {
 	const { user } = useAuth()
+
 	const navigate = useNavigate()
 
 	const initialCustomizedValue = 100
+
 	const initialFormValues = {
 		artName: '',
 		category: null,
@@ -55,8 +57,11 @@ const CreateArt = () => {
 	})
 
 	const ZERO = 0
+
 	const initialStep = 0
+
 	const [step, setStep] = useState<number>(initialStep)
+
 	const someItemIsDirty = (items: number[]) => items.some((item) => item !== initialCustomizedValue)
 
 	const valuesArray = [
@@ -72,6 +77,7 @@ const CreateArt = () => {
 			someItemIsDirty([formik.values.customized.contrast, formik.values.customized.brightness]),
 		],
 	]
+
 	const mergedChecklist = merger(checklist, valuesArray)
 
 	return (

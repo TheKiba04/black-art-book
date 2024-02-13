@@ -28,15 +28,23 @@ const CreateArtForm = ({
 	onChangeStep: (step: number) => void
 }) => {
 	const styles = useStyles()
+
 	const steps = ['Describe art', 'Upload art']
+
 	const increasedIndex = 1
+
 	const initialStep = 0
+
 	const lastStep = 1
+
 	const isFirstStep = activeStep === initialStep
+
 	const isLastStep = activeStep === lastStep
+
 	const initialSliderValue = 100
 
 	const [file, setFile] = useState<File | null>(null)
+
 	const [fileSrc, setFileSrc] = useState<string | null>(null)
 
 	const displayLabelConditionally = (condition: number) =>
@@ -59,6 +67,7 @@ const CreateArtForm = ({
 
 		newHashtag && handleHashtagsChange([...formHandler.values.hashtags, newHashtag])
 	}
+
 	const handleHashtagsChange = (values: MultiValue<Option>) => {
 		formHandler.setFieldValue('hashtags', values)
 	}
@@ -72,11 +81,10 @@ const CreateArtForm = ({
 		formHandler.setFieldValue('file', inputElement.files[0])
 		formHandler.setFieldValue('cropped', false)
 	}
-
 	
-
 	const handleCropImage = async (src: string, filename: string, filetype: string) => {
 		const croppedBlob = dataURItoBlob(src, filetype)
+
 		const file = new File([croppedBlob], filename, { type: filetype }) // Specify the desired file name and type
 
 		setFile(file)

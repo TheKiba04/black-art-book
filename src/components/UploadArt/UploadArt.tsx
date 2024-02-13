@@ -30,6 +30,7 @@ const UploadArt = () =>
 	const handleOpenModal = () => {
 		setOpen(true)
 	}
+
 	const handleCloseModal = () => {
 		setOpen(false)
 	}

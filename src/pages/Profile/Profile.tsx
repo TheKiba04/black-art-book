@@ -9,6 +9,7 @@ import { Art } from '@/types/Art'
 
 const Profile = () => {
 	const { user } = useAuth()
+
 	const [arts, setArts] = useState<Art[] | []>([])
 
 	useEffect(() => {

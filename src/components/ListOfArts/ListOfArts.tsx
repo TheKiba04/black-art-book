@@ -15,9 +15,11 @@ interface ListOfArtsProps {
 	list: Art[] | []
 	personal?: boolean
 }
+
 const ListOfArts = ({ title, list, personal,
 	 }: ListOfArtsProps) => {
 	const { user } = useAuth()
+
 	const [selectedArt, setSelectedArt] = useState<Art | null>(null)
 
 	const handleSelectArt = (art: Art) => {

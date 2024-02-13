@@ -12,10 +12,15 @@ import { useStyles } from './Heading.styles'
 
 const Heading = () => {
 	const { user } = useAuth()
+
 	const styles = useStyles()
+
 	const navigate = useNavigate()
+
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+
 	const open = Boolean(anchorEl)
+
 	const popoverId = open ? 'redirect-popover' : undefined
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,10 +30,12 @@ const Heading = () => {
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
+
 	const navigateToLogin = () => {
 		handleClose()
 		navigate('/signin')
 	}
+
 	const navigateToCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
 		user ? navigate('/create') : handleClick(event)
 	}

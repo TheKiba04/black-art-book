@@ -20,11 +20,16 @@ import { useStyles } from './CommentItem.styles'
 interface CommentItemProps {
 	comment: Comment
 }
+
 const CommentItem = ({ comment }: CommentItemProps) => {
 	const styles = useStyles()
-	const BADGE_INVISIBILITY_LIMIT = 1
+
+	const BADGE_INVISIBILITY_LIMIT = 0
+
 	const [likes, setLikes] = useState<string[]>(comment.likes)
+
 	const [commentator, setCommentator] = useState<User | null>(null)
+
 	const { user } = useAuth()
 
 	const renderLikeIcon = (likes: string[]) =>
@@ -39,9 +44,11 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 		setCommentLike(id, uid)
 		setLikes((prev) => [...prev, uid])
 	}
+
 	const handleClickLike =
 		(likes: string[]) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			event.stopPropagation()
+
 			const id = event.currentTarget.id
 
 			if (user) {

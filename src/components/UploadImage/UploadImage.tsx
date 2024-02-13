@@ -24,8 +24,11 @@ const UploadImage = ({ fileSrc, onUpload, onCrop, style, className }: UploadImag
 	const styles = useStyles()
 
 	const [startCrop, setStartCrop] = useState(false)
+
 	const [image, setImage] = useState<string | undefined>(undefined)
+
 	const [localFile, setLocalFile] = useState<File | undefined>(undefined)
+
 	const cropperRef = createRef<ReactCropperElement>()
 
 

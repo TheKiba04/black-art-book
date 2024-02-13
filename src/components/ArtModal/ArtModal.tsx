@@ -25,14 +25,19 @@ interface ArtModalProps {
 	art: Art
 	user: User | null
 }
+
 const ArtModal = ({ user, onClose, art }: ArtModalProps) => {
 	const styles = useStyles()
+
 	const allowedSymbols = 70
+
 	const [likes, setLikes] = useState<string[]>(art.likes)
+	
 
 	const handleClose = () => {
 		onClose()
 	}
+
 	const BADGE_INVISIBILITY_LIMIT = 0
 
 	const renderLikeIcon = (likes: string[]) =>
@@ -47,9 +52,11 @@ const ArtModal = ({ user, onClose, art }: ArtModalProps) => {
 		setLike(id, uid)
 		setLikes((prev) => [...prev, uid])
 	}
+
 	const handleClickLike =
 		(likes: string[]) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			event.stopPropagation()
+
 			const id = event.currentTarget.id
 
 			if (user) {
@@ -68,13 +75,13 @@ const ArtModal = ({ user, onClose, art }: ArtModalProps) => {
 						id={art.uid}
 						className={styles.artModalButton}
 						size='small'
-						onClick={handleClickLike(art.likes)}
+						onClick={handleClickLike(likes)}
 					>
 						<Badge
 							className={styles.badge}
-							badgeContent={art.likes.length}
+							badgeContent={likes.length}
 							color='secondary'
-							invisible={art.likes.length <= BADGE_INVISIBILITY_LIMIT}
+							invisible={likes.length <= BADGE_INVISIBILITY_LIMIT}
 						>
 							{renderLikeIcon(likes)}
 						</Badge>

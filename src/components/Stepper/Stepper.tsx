@@ -3,6 +3,7 @@ import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import MUIStepper from '@mui/material/Stepper'
 import Typography from '@mui/material/Typography'
+import { map } from 'lodash'
 
 import { useStyles } from './Stepper.styles'
 
@@ -10,9 +11,9 @@ const Stepper = ({ steps, activeStep }: { steps: string[]; activeStep: number })
 	const styles = useStyles()
 
 	return (
-		<Box sx={{ width: '100%' }}>
+		<Box className={styles.stepperWrapper}>
 			<MUIStepper activeStep={activeStep} alternativeLabel className={styles.stepperContainer}>
-				{steps.map((label) => (
+				{map(steps, (label) => (
 					<Step key={label}>
 						<StepLabel>
 							<Typography variant='subtitle2'>{label}</Typography>
