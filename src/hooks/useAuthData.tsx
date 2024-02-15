@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 
 import { signin, signup } from '@/helpers/auth'
 import { useLocalNavigate } from '@/hooks/useLocalNavigate'
-import { AuthFormikValues } from '@/types/Auth'
+import AuthFormikValues  from '@/types/Auth'
 
 const useAuthData = (mode:string) => {
     
