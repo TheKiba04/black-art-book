@@ -1,4 +1,4 @@
-export interface Art {
+interface Art {
 	uid: string
 	name: string
 	description: string
@@ -13,3 +13,5 @@ export interface Art {
 	createdAt: string
 	updatedAt: string
 }
+
+export default Art

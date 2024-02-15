@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography'
 
 import { getInitials } from '@/helpers/common'
 import { getUser, removeCommentLike, setCommentLike } from '@/helpers/database'
-import { useAuth } from '@/hooks/useUser'
+import useUser  from '@/hooks/useUser'
 import { Comment } from '@/types/Comment'
-import { User } from '@/types/User'
+import User from '@/types/User'
 
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
@@ -31,7 +31,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 
 	const [commentator, setCommentator] = useState<User | null>(null)
 
-	const { user } = useAuth()
+	const { user } = useUser()
 
 	const renderLikeIcon = (likes: string[]) =>
 		user && likes.includes(user.uid) ? <FavoriteIcon /> : <FavoriteBorderIcon />

@@ -1,1 +1,7 @@
 export const RESOURCE_NAME = 'BLACK ART BOOK'
+
+export const BADGE_INVISIBILITY_LIMIT = 0
+
+export const BADGE_BASIC_COUNT = 0
+
+export const ALLOWED_MODAL_TITLE_LENGTH = 70

@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom'
 
 import Grid from '@mui/material/Grid'
 
-import Checklist from '@/components/Checklist/Checklist'
-import CreateArtForm from '@/components/CreateArtForm/CreateArtForm'
 import { merger } from '@/helpers/common'
 import { createArt } from '@/helpers/database'
-import { useAuth } from '@/hooks/useUser'
+import useUser  from '@/hooks/useUser'
 import { Option } from '@/types/Common'
+
+import Checklist from '@components/Checklist/Checklist'
+import CreateArtForm from '@components/CreateArtForm/CreateArtForm'
 
 export interface CustomFormikValues {
 	artName: string
@@ -24,7 +25,7 @@ export interface CustomFormikValues {
 }
 
 const CreateArt = () => {
-	const { user } = useAuth()
+	const { user } = useUser()
 
 	const navigate = useNavigate()
 

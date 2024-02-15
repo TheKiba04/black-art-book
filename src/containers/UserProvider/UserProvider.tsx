@@ -2,22 +2,18 @@ import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
 import { onAuthStateChanged } from 'firebase/auth'
 
-import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
-import Typography from '@mui/material/Typography'
-
 import { auth } from '@/config/firebase'
 import { getUser } from '@/helpers/database'
-import { User } from '@/types/User'
+import User from '@/types/User'
 
-import { useStyles } from './UserProvider.styles'
+import MainLoader from '@components/MainLoader/MainLoader'
+
 
 export const UserContext = createContext(
 	null as unknown as { user: User | null; setUser: (user: User) => void }
 )
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
-	const styles = useStyles()
 
 	const [currentUser, setCurrentUser] = useState<User>(null as unknown as User)
 
@@ -46,10 +42,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 	return (
 		<UserContext.Provider value={value}>
 			{loading ? (
-				<Box className={styles.loadingContainer}>
-					<Typography variant='inherit'>Loading...</Typography>
-					<CircularProgress size={20} />
-				</Box>
+				<MainLoader />
 			) : (
 				children
 			)}

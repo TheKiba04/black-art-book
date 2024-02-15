@@ -4,11 +4,12 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 
-import UploadImage from '@/components/UploadImage/UploadImage'
 import { dataURItoBlob } from '@/helpers/common'
 import { updateUser, updateUserWithAvatar } from '@/helpers/database'
 import { loggerErr } from '@/helpers/logger'
-import { User } from '@/types/User'
+import User from '@/types/User'
+
+import UploadImage from '@components/UploadImage/UploadImage'
 
 const EditPassport = ({ user, onEdit }: { user: User; onEdit: () => void }) => {
 	const [file, setFile] = useState<File | null>(null)

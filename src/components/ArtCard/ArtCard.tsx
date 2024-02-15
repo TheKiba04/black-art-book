@@ -1,40 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
-import { getComments, getUser, removeLike, setLike } from '@/helpers/database'
-import { Art } from '@/types/Art'
-import { User } from '@/types/User'
+import { BADGE_BASIC_COUNT } from '@/constants/common'
+import { getComments, getUser } from '@/helpers/database'
+import useUser from '@/hooks/useUser'
+import Art from '@/types/Art'
 
-import CommentIcon from '@mui/icons-material/Comment'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import CommentButton from '@components/CommentButton/CommentButton'
+import LikeButton from '@components/LikeButton/LikeButton'
 
 import { useStyles } from './ArtCard.styles'
 
 interface ArtCardProps {
 	art: Art
-	user: User | null
-	isPersonal?: boolean
+	isPrivate?: boolean
 	onClick: (art: Art) => void
 }
 
-const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
-	const BADGE_INVISIBILITY_LIMIT = 0
+const ArtCard = ({ art, isPrivate, onClick }: ArtCardProps) => {
+	const { user } = useUser()
 
-	const BADGE_BASIC_COUNT = 0
-
-	const [userName,setUserName] = useState<string>('')
-
-	const [likes, setLikes] = useState<string[]>(art.likes)
+	const [userName, setUserName] = useState<string>('')
 
 	const [commentsCount, setCommentsCount] = useState<number>(BADGE_BASIC_COUNT)
 
@@ -44,32 +37,6 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 		onClick(art)
 	}
 
-	const renderLikeIcon = (likes: string[]) =>
-		user && likes.includes(user.uid) ? <FavoriteIcon /> : <FavoriteBorderIcon />
-
-	const handleRemoveLike = (id: string, uid: string) => {
-		removeLike(id, uid)
-		setLikes((prev) => prev.filter((like) => like !== uid))
-	}
-
-	const handleSetLike = (id: string, uid: string) => {
-		setLike(id, uid)
-		setLikes((prev) => [...prev, uid])
-	}
-
-	const handleClickLike =
-		(likes: string[]) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-			event.stopPropagation()
-
-			const id = event.currentTarget.id
-
-			if (user) {
-				const l = likes.includes(user.uid)
-
-				return l ? handleRemoveLike(id, user.uid) : handleSetLike(id, user.uid)
-			}
-		}
-
 	useEffect(() => {
 		getComments(art.comments).then((comments) => setCommentsCount(comments.length))
 		getUser(art.createdBy).then((user) => setUserName(user?.fullname || ''))
@@ -78,57 +45,41 @@ const ArtCard = ({ art, user, isPersonal, onClick }: ArtCardProps) => {
 	return (
 		<Grid item>
 			<Card className={styles.recentArtsCard} onClick={handleClick}>
-				<div>
-					<CardMedia className={styles.recentArtsImage} sx={{ 
-						height: 320,
+				<CardMedia
+					className={styles.recentArtsImage}
+					sx={{
 						filter: `brightness(${art.customized.brightness}%) contrast(${art.customized.contrast}%)`,
-					}} image={art.artURL} />
-					<CardContent className={styles.recentArtsCardContent}>
-						<Typography gutterBottom variant='h6' fontWeight='bold' component='div'>
-							{art.name}
-						</Typography>
-						<Typography className={styles.recentArtsDescription} variant='body1' color='text.secondary'>
-							{art.description}
-						</Typography>
-					</CardContent>
-				</div>
+					}}
+					image={art.artURL}
+				/>
+				<CardContent className={styles.recentArtsCardContent}>
+					<Typography
+						gutterBottom
+						variant='h6'
+						component='div'
+						className={styles.recentArtsCardName}
+					>
+						{art.name}
+					</Typography>
+					<Typography className={styles.recentArtsDescription} variant='body1'>
+						{art.description}
+					</Typography>
+				</CardContent>
+
 				<CardActions
 					className={styles.recentArtsCardActions}
 					sx={{
-						justifyContent: !isPersonal ? 'space-between' : 'flex-end',
+						justifyContent: !isPrivate ? 'space-between' : 'flex-end',
 					}}
 				>
-					{!isPersonal && (
+					{!isPrivate && (
 						<Typography variant='caption' color='text.secondary'>
 							Author: {userName}
 						</Typography>
 					)}
 					<Box>
-						<IconButton
-							id={art.uid}
-							className={styles.recentArtsButton}
-							size='small'
-							onClick={handleClickLike(likes)}
-						>
-							<Badge
-								className={styles.badge}
-								badgeContent={likes.length}
-								color='secondary'
-								invisible={likes.length <= BADGE_INVISIBILITY_LIMIT}
-							>
-								{renderLikeIcon(likes)}
-							</Badge>
-						</IconButton>
-						<IconButton className={styles.recentArtsButton} size='small'>
-							<Badge
-								className={styles.badge}
-								badgeContent={commentsCount}
-								color='secondary'
-								invisible={commentsCount <= BADGE_INVISIBILITY_LIMIT}
-							>
-								<CommentIcon />
-							</Badge>
-						</IconButton>
+						<LikeButton currentUser={user} artLikes={art.likes} />
+						<CommentButton commentsCount={commentsCount} />
 					</Box>
 				</CardActions>
 			</Card>

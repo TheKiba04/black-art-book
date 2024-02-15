@@ -1,6 +1,3 @@
-import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
-
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -10,8 +7,7 @@ import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { signup } from '@/helpers/auth'
-import { AuthSignUpFormikValues } from '@/types/Auth'
+import  useAuthData  from '@/hooks/useAuthData'
 
 import Copyright from '@components/Copyright/Copyright'
 
@@ -22,27 +18,7 @@ import { useStyles } from './SignUp.styles'
 const SignUp = () => {
 	const styles = useStyles()
 
-	const navigate = useNavigate()
-
-	const navigateSignIn = () => navigate('/auth/signin')
-
-	const initialSignUpFormValues = {
-		email: '',
-		password: '',
-		firstName: '',
-		lastName: '',
-	}
-
-	const handleSubmit = async (data: AuthSignUpFormikValues) => {
-		const registeredUser = await signup(data)
-
-		registeredUser && navigateSignIn()
-	}
-
-	const formik = useFormik<AuthSignUpFormikValues>({
-		initialValues: initialSignUpFormValues,
-		onSubmit: handleSubmit,
-	})
+	const {authFormHandler} = useAuthData('signup')
 
 	return (
 		<Container component='main' maxWidth='xs' className={styles.signUpContainer}>
@@ -56,14 +32,14 @@ const SignUp = () => {
 				<Box
 					component='form'
 					noValidate={false}
-					onSubmit={formik.handleSubmit}
+					onSubmit={authFormHandler.handleSubmit}
 					className={styles.form}
 				>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								value={formik.values.firstName}
-								onChange={formik.handleChange}
+								value={authFormHandler.values.firstName}
+								onChange={authFormHandler.handleChange}
 								size='small'
 								name='firstName'
 								required
@@ -76,8 +52,8 @@ const SignUp = () => {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								value={formik.values.lastName}
-								onChange={formik.handleChange}
+								value={authFormHandler.values.lastName}
+								onChange={authFormHandler.handleChange}
 								size='small'
 								required
 								fullWidth
@@ -89,8 +65,8 @@ const SignUp = () => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								value={formik.values.email}
-								onChange={formik.handleChange}
+								value={authFormHandler.values.email}
+								onChange={authFormHandler.handleChange}
 								size='small'
 								required
 								fullWidth
@@ -102,8 +78,8 @@ const SignUp = () => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								value={formik.values.password}
-								onChange={formik.handleChange}
+								value={authFormHandler.values.password}
+								onChange={authFormHandler.handleChange}
 								size='small'
 								required
 								fullWidth
@@ -120,7 +96,7 @@ const SignUp = () => {
 					</Button>
 					<Grid container className={styles.linkContainer}>
 						<Grid item>
-							<Link href='/signin' variant='body1'>
+							<Link href='/auth/signin' variant='body1'>
 								Already have an account? Sign in
 							</Link>
 						</Grid>

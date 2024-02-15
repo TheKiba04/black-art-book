@@ -7,18 +7,19 @@ import moment from 'moment'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import CommentItem from '@/components/CommentItem/CommentItem'
 import { createComment, getComments } from '@/helpers/database'
-import { useAuth } from '@/hooks/useUser'
-import { Art } from '@/types/Art'
-import { Comment } from '@/types/Comment'
+import useUser from '@/hooks/useUser'
+import Art from '@/types/Art'
+import Comment from '@/types/Comment'
+
+import CommentItem from '@components/CommentItem/CommentItem'
 
 interface CommentsProps {
 	currentArt: Art
 }
 
 const Comments = ({ currentArt }: CommentsProps) => {
-	const { user } = useAuth()
+	const { user } = useUser()
 
 	const [comments, setComments] = useState<Comment[]>([])
 

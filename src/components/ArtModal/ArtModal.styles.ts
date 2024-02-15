@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { makeStyles } from '@mui/styles'
 
 import theme from '@/styles/theme'
@@ -12,6 +13,10 @@ export const useStyles = makeStyles({
 			maxWidth: '1000px',
 		},
 	},
+	artModalContentWrapper: {
+		paddingTop: theme.spacing(1),
+		justifyContent: 'center',
+	},
 	artModalCloseButton: {
 		width: '40px',
 		height: '40px',
@@ -21,6 +26,9 @@ export const useStyles = makeStyles({
 			backgroundColor: theme.palette.secondary.main,
 			color: theme.palette.primary.main,
 		},
+	},
+	artModalImageContainer: {
+		textAlign: 'center',
 	},
 	artModalImage: {
 		maxHeight: '800px',
@@ -35,6 +43,11 @@ export const useStyles = makeStyles({
 		color: theme.palette.primary.dark,
 		fontSize: '2rem',
 		lineHeight: '2.5rem',
+	},
+	artModalDescription: {
+		color: theme.palette.secondary.main,
+		fontStyle: 'italic',
+		whiteSpace: 'pre-line',
 	},
 	artModalButton: {
 		color: theme.palette.secondary.main,

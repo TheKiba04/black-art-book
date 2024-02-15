@@ -1,8 +1,3 @@
-import { useState } from 'react'
-
-import Comments from '../Comments/Comments'
-
-import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
@@ -11,93 +6,49 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
+import { ALLOWED_MODAL_TITLE_LENGTH } from '@/constants/common'
 import { trimString } from '@/helpers/common'
-import { removeLike, setLike } from '@/helpers/database'
-import { Art } from '@/types/Art'
-import { User } from '@/types/User'
+import useUser from '@/hooks/useUser'
+import Art from '@/types/Art'
+
+import Comments from '@components/Comments/Comments'
+import LikeButton from '@components/LikeButton/LikeButton'
 
 import CloseIcon from '@mui/icons-material/Close'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
 import { useStyles } from './ArtModal.styles'
 interface ArtModalProps {
 	onClose: () => void
 	art: Art
-	user: User | null
 }
 
-const ArtModal = ({ user, onClose, art }: ArtModalProps) => {
+const ArtModal = ({ onClose, art }: ArtModalProps) => {
 	const styles = useStyles()
 
-	const allowedSymbols = 70
+	const { user } = useUser()
 
-	const [likes, setLikes] = useState<string[]>(art.likes)
-	
 
 	const handleClose = () => {
 		onClose()
 	}
 
-	const BADGE_INVISIBILITY_LIMIT = 0
-
-	const renderLikeIcon = (likes: string[]) =>
-		user && likes.includes(user.uid) ? <FavoriteIcon /> : <FavoriteBorderIcon />
-
-	const handleRemoveLike = (id: string, uid: string) => {
-		removeLike(id, uid)
-		setLikes((prev) => prev.filter((like) => like !== uid))
-	}
-
-	const handleSetLike = (id: string, uid: string) => {
-		setLike(id, uid)
-		setLikes((prev) => [...prev, uid])
-	}
-
-	const handleClickLike =
-		(likes: string[]) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-			event.stopPropagation()
-
-			const id = event.currentTarget.id
-
-			if (user) {
-				const l = likes.includes(user.uid)
-
-				return l ? handleRemoveLike(id, user.uid) : handleSetLike(id, user.uid)
-			}
-		}
-
 	return (
 		<Dialog className={styles.artModalContainer} open onClose={handleClose}>
 			<DialogTitle className={styles.artModalTitle} id='art-modal-title'>
 				<Box>
-					{trimString(art.name, allowedSymbols)}
-					<IconButton
-						id={art.uid}
-						className={styles.artModalButton}
-						size='small'
-						onClick={handleClickLike(likes)}
-					>
-						<Badge
-							className={styles.badge}
-							badgeContent={likes.length}
-							color='secondary'
-							invisible={likes.length <= BADGE_INVISIBILITY_LIMIT}
-						>
-							{renderLikeIcon(likes)}
-						</Badge>
-					</IconButton>
+					{trimString(art.name, ALLOWED_MODAL_TITLE_LENGTH)}
+					<LikeButton currentUser={user} artLikes={art.likes} />
 				</Box>
 				<IconButton aria-label='close' className={styles.artModalCloseButton} onClick={handleClose}>
 					<CloseIcon />
 				</IconButton>
 			</DialogTitle>
 			<DialogContent className={styles.artModalContent}>
-				<Grid container spacing={3} pt={1} justifyContent='center'>
+				<Grid container spacing={3} className={styles.artModalContentWrapper}>
 					<Grid
 						item
 						xs={12}
-						textAlign='center'
+						className={styles.artModalImageContainer}
 						sx={{
 							filter: `brightness(${art.customized.brightness}%) contrast(${art.customized.contrast}%)`,
 						}}
@@ -107,9 +58,7 @@ const ArtModal = ({ user, onClose, art }: ArtModalProps) => {
 					<Grid item xs={10}>
 						<Typography
 							variant='caption'
-							fontStyle='italic'
-							color='secondary.main'
-							whiteSpace='pre-line'
+							className={styles.artModalDescription}
 						>
 							{art.description}
 						</Typography>

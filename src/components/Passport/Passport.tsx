@@ -6,13 +6,13 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import { getUser } from '@/helpers/database'
-import { useAuth } from '@/hooks/useUser'
-import { User } from '@/types/User'
+import useUser  from '@/hooks/useUser'
+import User from '@/types/User'
 
 import EditPassport from './EditPassport/EditPassport'
 
 const Passport = () => {
-	const { user } = useAuth()
+	const { user } = useUser()
 
 	const [editMode, setEditMode] = useState<boolean>(false)
 

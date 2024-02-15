@@ -1,4 +1,4 @@
-export interface Comment {
+interface Comment {
 	uid?: string
 	artId: string
 	userId: string
@@ -7,3 +7,5 @@ export interface Comment {
 	createdAt: string
 	updatedAt: string
 }
+
+export default Comment

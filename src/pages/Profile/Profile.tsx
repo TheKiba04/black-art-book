@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 
-import BlockDivider from '@/components/BlockDivider/BlockDivider'
-import ListOfArts from '@/components/ListOfArts/ListOfArts'
-import Passport from '@/components/Passport/Passport'
 import { getUserArts } from '@/helpers/database'
-import { useAuth } from '@/hooks/useUser'
-import { Art } from '@/types/Art'
+import useUser  from '@/hooks/useUser'
+import Art from '@/types/Art'
+
+import BlockDivider from '@components/BlockDivider/BlockDivider'
+import ListOfArts from '@components/ListOfArts/ListOfArts'
+import Passport from '@components/Passport/Passport'
 
 const Profile = () => {
-	const { user } = useAuth()
+	const { user } = useUser()
 
 	const [arts, setArts] = useState<Art[] | []>([])
 
@@ -22,7 +23,7 @@ const Profile = () => {
 		<>
 			<Passport />
 			<BlockDivider />
-			<ListOfArts title='My Arts' personal list={arts} />
+			<ListOfArts title='My Arts' isPrivate list={arts} />
 		</>
 	)
 }

@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { Theme } from '@mui/material/styles'
 
-import { User } from '@/types/User'
+import User from '@/types/User'
 
 const ProfileMenu = ({ user, signout }: { user: User; signout: () => void }) => {
 	const navigate = useNavigate()

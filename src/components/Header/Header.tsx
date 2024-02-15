@@ -5,13 +5,14 @@ import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 
-import Logo from '@/components/Logo/Logo'
-import ProfileMenu from '@/components/ProfileMenu/ProfileMenu'
 import { signout } from '@/helpers/auth'
-import { useAuth } from '@/hooks/useUser'
+import useUser  from '@/hooks/useUser'
+
+import Logo from '@components/Logo/Logo'
+import ProfileMenu from '@components/ProfileMenu/ProfileMenu'
 
 const Header = () => {
-	const { user } = useAuth()
+	const { user } = useUser()
 
 	const navigate = useNavigate()
 

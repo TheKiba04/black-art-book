@@ -1,11 +1,11 @@
+/* eslint-disable no-magic-numbers */
 import { makeStyles } from '@mui/styles'
 
 import theme from '@/styles/theme'
 
 export const useStyles = makeStyles({
-	recentArtsImage: {},
-	recentArtsButton: {
-		color: theme.palette.secondary.main,
+	recentArtsImage: {
+		height: 320,
 	},
 	recentArtsCard: {
 		width: 345,
@@ -22,25 +22,20 @@ export const useStyles = makeStyles({
 		paddingTop: '0 !important',
 		paddingBottom: '0 !important',
 	},
+	recentArtsCardName: {
+		fontWeight: 'bold',
+	},
 	recentArtsDescription: {
 		overflow: 'hidden',
-   		display: '-webkit-box',
-  		'webkit-line-clamp': 4, 
-    	lineClamp: 4, 
-   		'-webkit-box-orient': 'vertical',
+		display: '-webkit-box',
+		'webkit-line-clamp': 4,
+		lineClamp: 4,
+		'-webkit-box-orient': 'vertical',
+		color:theme.palette.text.secondary
 	},
 	recentArtsCardActions: {
-		padding: '0 16px 0',
+		padding: theme.spacing(0, 2),
 		paddingTop: '0 !important',
 		paddingBottom: '8px !important',
-	},
-	badge: {
-		'& .MuiBadge-badge': {
-			right: -3,
-			top: 1,
-			border: `2px solid ${theme.palette.background.paper}`,
-			padding: '0 2px',
-			fontSize: '0.6rem',
-		},
 	},
 })

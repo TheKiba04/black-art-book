@@ -1,3 +1,4 @@
+ 
 import { makeStyles } from '@mui/styles'
 
 import { animations } from '@/styles/animations'
@@ -6,33 +7,26 @@ import theme from '@/styles/theme'
 export const useStyles = makeStyles({
 	headingContainer: {
 		padding: '3rem 0 0',
-		overflow: 'hidden',
+		overflow: 'hidden',	
+		justifyContent:'space-between',
+		alignItems:'center'
 	},
 	headingSubtitle: {
 		paddingTop: '2rem!important',
 		paddingBottom: '.5rem!important',
 	},
-	headingButton: {
-		backgroundColor: theme.palette.primary.dark,
-		color: theme.palette.primary.main,
-		border: `2px solid ${theme.palette.primary.main}`,
-		outline: `2px solid ${theme.palette.primary.dark}`,
-		borderRadius: '2px',
-		padding: '0.3em 1em',
-		marginBottom: '.1rem',
-		'&:hover': {
-			backgroundColor: theme.palette.primary.main,
-			color: theme.palette.primary.dark,
-			border: `2px solid ${theme.palette.primary.dark}`,
-		},
+	center: {
+		color: theme.palette.secondary.dark,
 	},
 	slideInLeft: {
 		'-webkit-animation': 'slideInLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s both',
 		animation: 'slideInLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s both',
+		color: theme.palette.secondary.dark,
 	},
 	slideInRight: {
 		'-webkit-animation': 'slideInRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s both',
 		animation: 'slideInRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s both ',
+		color: theme.palette.secondary.dark,
 	},
 	slideInTop: {
 		'-webkit-animation': 'slideInTop 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s both',

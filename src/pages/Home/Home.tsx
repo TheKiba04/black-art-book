@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import BlockDivider from '@/components/BlockDivider/BlockDivider'
-import Heading from '@/components/Heading/Heading'
-import ListOfArts from '@/components/ListOfArts/ListOfArts'
 import { getAllArts } from '@/helpers/database'
-import { Art } from '@/types/Art'
+import Art from '@/types/Art'
+
+import BlockDivider from '@components/BlockDivider/BlockDivider'
+import Heading from '@components/Heading/Heading'
+import ListOfArts from '@components/ListOfArts/ListOfArts'
 
 const Home = () => {
 	const [recentArts, setRecentArts] = useState<Art[] | []>([])
@@ -17,10 +18,7 @@ const Home = () => {
 		<>
 			<Heading />
 			<BlockDivider />
-			<ListOfArts
-				title='Recent Arts'
-				list={recentArts}
-			/>
+			<ListOfArts title='Recent Arts' list={recentArts} />
 		</>
 	)
 }

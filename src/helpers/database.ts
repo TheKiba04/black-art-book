@@ -17,9 +17,9 @@ import moment from 'moment'
 
 import { auth, database } from '@/config/firebase'
 import { CustomFormikValues } from '@/pages/CreateArt/CreateArt'
-import { Art } from '@/types/Art'
+import Art from '@/types/Art'
 import { Comment } from '@/types/Comment'
-import { User } from '@/types/User'
+import User from '@/types/User'
 
 import { loggerErr } from './logger'
 import { uploadImage } from './storage'

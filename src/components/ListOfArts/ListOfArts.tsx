@@ -1,23 +1,25 @@
 import { useState } from 'react'
 
-import ArtModal from '../ArtModal/ArtModal'
-import { map } from 'lodash'
+import { isEmpty, map } from 'lodash'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import ArtCard from '@/components/ArtCard/ArtCard'
-import { useAuth } from '@/hooks/useUser'
-import { Art } from '@/types/Art'
+import Art from '@/types/Art'
+
+import ArtCard from '@components/ArtCard/ArtCard'
+import ArtModal from '@components/ArtModal/ArtModal'
+
+import { useStyles } from './ListOfArts.styles'
 
 interface ListOfArtsProps {
 	title: string
 	list: Art[] | []
-	personal?: boolean
+	isPrivate?: boolean
 }
 
-const ListOfArts = ({ title, list, personal }: ListOfArtsProps) => {
-	const { user } = useAuth()
+const ListOfArts = ({ title, list, isPrivate }: ListOfArtsProps) => {
+	const styles = useStyles()
 
 	const [selectedArt, setSelectedArt] = useState<Art | null>(null)
 
@@ -29,36 +31,26 @@ const ListOfArts = ({ title, list, personal }: ListOfArtsProps) => {
 		setSelectedArt(null)
 	}
 
-	const renderArtModal = () =>
-		selectedArt && <ArtModal user={user} onClose={handleClose} art={selectedArt} />
-
 	return (
 		<>
-			<Grid container spacing={4} pt={3}>
-				<Grid item xs={12} textAlign='right' display='flex' gap={3} justifyContent='flex-end'>
-					{/* {personal && <UploadArt onAddArts={onAddArts} />} */}
-					<Typography variant='h5' fontStyle='italic' color='secondary.main'>
+			<Grid container spacing={4} className={styles.listContainer}>
+				<Grid item xs={12} className={styles.listTitleContainer}>
+					<Typography variant='h5' className={styles.listTitle}>
 						{title}
 					</Typography>
 				</Grid>
-				{!list.length && (
-					<Grid item xs={12} textAlign='center' pt={2}>
-						<Typography variant='h5' fontStyle='italic' color='secondary.main'>
+				{isEmpty(list) && (
+					<Grid item xs={12} className={styles.emptyListContainer}>
+						<Typography variant='h5' className={styles.emptyListTitle}>
 							There are no arts yet
 						</Typography>
 					</Grid>
 				)}
 				{map(list, (art) => (
-					<ArtCard
-						key={art.uid}
-						art={art}
-						user={user}
-						isPersonal={personal}
-						onClick={handleSelectArt}
-					/>
+					<ArtCard key={art.uid} art={art} isPrivate={isPrivate} onClick={handleSelectArt} />
 				))}
 			</Grid>
-			{renderArtModal()}
+			{selectedArt && <ArtModal art={selectedArt} onClose={handleClose} />}
 		</>
 	)
 }

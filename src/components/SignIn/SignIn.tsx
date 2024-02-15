@@ -1,6 +1,3 @@
-import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
-
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -10,8 +7,7 @@ import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { signin } from '@/helpers/auth'
-import { AuthSignInFormikValues } from '@/types/Auth'
+import useAuthData from '@/hooks/useAuthData'
 
 import Copyright from '@components/Copyright/Copyright'
 
@@ -19,28 +15,11 @@ import LockIcon from '@mui/icons-material/Lock'
 
 import { useStyles } from './SignIn.styles'
 
-export const SignIn = () => {
+const SignIn = () => {
 	const styles = useStyles()
 
-	const navigate = useNavigate()
+	const {authFormHandler} = useAuthData('signin')
 
-	const navigateHome = () => navigate('/')
-
-	const initialSignUpFormValues = {
-		email: '',
-		password: '',
-	}
-
-	const handleSubmit = async (data: AuthSignInFormikValues) => {
-		const loggedUser = await signin(data)
-
-		loggedUser && navigateHome()
-	}
-
-	const formik = useFormik<AuthSignInFormikValues>({
-		initialValues: initialSignUpFormValues,
-		onSubmit: handleSubmit,
-	})
 
 	return (
 		<Grid container component='main' className={styles.signInContainer}>
@@ -54,10 +33,10 @@ export const SignIn = () => {
 						<Typography component='h1' variant='h5'>
 							Sign in
 						</Typography>
-						<Box component='form' noValidate onSubmit={formik.handleSubmit} className={styles.form}>
+						<Box component='form' noValidate onSubmit={authFormHandler.handleSubmit} className={styles.form}>
 							<TextField
-								value={formik.values.email}
-								onChange={formik.handleChange}
+								value={authFormHandler.values.email}
+								onChange={authFormHandler.handleChange}
 								size='small'
 								margin='normal'
 								required
@@ -69,8 +48,8 @@ export const SignIn = () => {
 								autoComplete='email'
 							/>
 							<TextField
-								value={formik.values.password}
-								onChange={formik.handleChange}
+								value={authFormHandler.values.password}
+								onChange={authFormHandler.handleChange}
 								size='small'
 								margin='normal'
 								required
@@ -104,3 +83,5 @@ export const SignIn = () => {
 		</Grid>
 	)
 }
+
+export default SignIn

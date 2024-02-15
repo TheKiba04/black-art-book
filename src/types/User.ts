@@ -1,4 +1,4 @@
-export interface User {
+interface User {
 	uid: string
 	avatarURL: string
 	fullname: string
@@ -6,3 +6,5 @@ export interface User {
 	artList: string[]
 	description?: string
 }
+
+export default User

@@ -11,12 +11,9 @@ const Footer = () => {
 			container
 			className={styles.footerContainer}
 			component='footer'
-			justifyContent='center'
-			alignItems='center'
-			p={2}
 		>
 			<Typography variant='body1' align='center'>
-				© 2023 Art Gallery
+				© 2023 Art Gallery (Afla-version. Desktop only)
 			</Typography>
 		</Grid>
 	)
