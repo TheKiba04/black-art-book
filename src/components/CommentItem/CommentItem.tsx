@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
 import { getInitials } from '@/helpers/common'
 import { getUser, removeCommentLike, setCommentLike } from '@/helpers/database'
 import useUser  from '@/hooks/useUser'
-import { Comment } from '@/types/Comment'
+import Comment from '@/types/Comment'
 import User from '@/types/User'
 
 import FavoriteIcon from '@mui/icons-material/Favorite'
