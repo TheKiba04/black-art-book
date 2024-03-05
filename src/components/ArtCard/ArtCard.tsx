@@ -13,8 +13,8 @@ import { getComments, getUser } from '@/helpers/database'
 import useUser from '@/hooks/useUser'
 import Art from '@/types/Art'
 
-import CommentButton from '@components/CommentButton/CommentButton'
-import LikeButton from '@components/LikeButton/LikeButton'
+import CommentButton from '@/components/Buttons/CommentButton/CommentButton'
+import LikeButton from '@/components/Buttons/LikeButton/LikeButton'
 
 import { useStyles } from './ArtCard.styles'
 

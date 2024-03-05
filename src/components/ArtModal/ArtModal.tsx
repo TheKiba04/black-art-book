@@ -12,7 +12,7 @@ import useUser from '@/hooks/useUser'
 import Art from '@/types/Art'
 
 import Comments from '@components/Comments/Comments'
-import LikeButton from '@components/LikeButton/LikeButton'
+import LikeButton from '@/components/Buttons/LikeButton/LikeButton'
 
 import CloseIcon from '@mui/icons-material/Close'
 

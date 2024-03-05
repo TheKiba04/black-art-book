@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import MainButton from '@components/MainButton/MainButton'
+import MainButton from '@/components/Buttons/MainButton/MainButton'
 
 import { useStyles } from './Heading.styles'
 
